@@ -10,7 +10,7 @@ import { Button } from '@/components/ui/button'
 export function ChatWidget() {
   const pathname = usePathname()
   const [isOpen, setIsOpen] = useState(false)
-  const { messages, input, handleInputChange, handleSubmit, isLoading } = useChat()
+  const { messages, input, handleInputChange, handleSubmit, isLoading, error } = useChat()
   const messagesEndRef = useRef<HTMLDivElement>(null)
 
   // Ne pas afficher sur le dashboard admin
@@ -121,6 +121,10 @@ export function ChatWidget() {
                   </span>
                 </div>
             </div>
+          {error && (
+            <div className="mx-auto my-2 rounded-lg bg-red-50 p-3 text-center text-xs text-red-500 border border-red-100 max-w-[85%]">
+              Oups ! L'assistante n'a pas pu répondre. (Avez-vous bien ajouté la clé API sur Vercel ?)
+            </div>
           )}
           <div ref={messagesEndRef} />
         </div>
@@ -138,7 +142,7 @@ export function ChatWidget() {
             <Button 
               type="submit" 
               size="icon"
-              disabled={isLoading || !input?.trim()}
+              disabled={isLoading || !input || input.length === 0}
               className="shrink-0 rounded-full h-10 w-10"
             >
               <Send className="h-4 w-4" />
