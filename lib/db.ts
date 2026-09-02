@@ -12,7 +12,11 @@ async function fetchWithRetry(
     const controller = new AbortController()
     const timer = setTimeout(() => controller.abort(), 30_000)
     try {
-      const res = await fetch(input, { ...init, signal: controller.signal })
+      const res = await fetch(input, { 
+        ...init, 
+        cache: 'no-store', 
+        signal: controller.signal 
+      })
       clearTimeout(timer)
       return res
     } catch (err) {
