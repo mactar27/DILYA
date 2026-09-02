@@ -138,7 +138,7 @@ export function ChatWidget() {
             <Button 
               type="submit" 
               size="icon"
-              disabled={isLoading || !input.trim()}
+              disabled={isLoading || !input?.trim()}
               className="shrink-0 rounded-full h-10 w-10"
             >
               <Send className="h-4 w-4" />
