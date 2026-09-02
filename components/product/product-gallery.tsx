@@ -35,7 +35,7 @@ export function ProductGallery({ images, productName }: ProductGalleryProps) {
                 alt={`${productName} - miniature ${idx + 1}`}
                 fill
                 sizes="80px"
-                className="object-cover"
+                className="object-contain"
               />
             </button>
           ))}
@@ -50,7 +50,7 @@ export function ProductGallery({ images, productName }: ProductGalleryProps) {
           fill
           priority
           sizes="(max-width: 1024px) 100vw, 50vw"
-          className="object-cover"
+          className="object-contain"
         />
       </div>
     </div>

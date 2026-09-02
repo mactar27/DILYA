@@ -37,7 +37,7 @@ export async function CategoryGrid() {
                   alt={cat.name}
                   fill
                   sizes="(max-width: 1024px) 50vw, 25vw"
-                  className="object-cover transition-transform duration-700 group-hover:scale-110"
+                  className="object-contain transition-transform duration-700 group-hover:scale-110"
                 />
                 
                 <div className="absolute inset-0 bg-gradient-to-t from-primary/80 via-primary/20 to-transparent opacity-80 transition-opacity group-hover:opacity-100" />
