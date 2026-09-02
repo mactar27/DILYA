@@ -32,13 +32,15 @@ export function ProductCard({ product }: { product: Product }) {
   return (
     <Link href={`/produit/${product.slug}`} className="group flex flex-col h-full bg-[#fbf9f6] rounded-[24px] overflow-hidden p-2 shadow-sm border border-black/[0.03]">
       <div className="relative aspect-[4/5] overflow-hidden rounded-2xl bg-secondary/50">
-        <Image
-          src={product.images[0] || '/placeholder.svg'}
-          alt={product.name}
-          fill
-          sizes="(max-width: 768px) 50vw, 25vw"
-          className="object-contain transition-transform duration-500 ease-out group-hover:scale-105"
-        />
+        <div className="absolute inset-4 sm:inset-6">
+          <Image
+            src={product.images[0] || '/placeholder.svg'}
+            alt={product.name}
+            fill
+            sizes="(max-width: 768px) 50vw, 25vw"
+            className="object-contain transition-transform duration-500 ease-out group-hover:scale-105"
+          />
+        </div>
 
         <div className="absolute left-3 top-3 flex flex-col gap-1.5">
           {product.isNew && (

@@ -44,14 +44,16 @@ export function ProductGallery({ images, productName }: ProductGalleryProps) {
 
       {/* Main Image */}
       <div className="relative aspect-square flex-1 overflow-hidden rounded-2xl bg-secondary">
-        <Image
-          src={imagesList[activeIndex]}
-          alt={productName}
-          fill
-          priority
-          sizes="(max-width: 1024px) 100vw, 50vw"
-          className="object-contain"
-        />
+        <div className="absolute inset-6">
+          <Image
+            src={imagesList[activeIndex]}
+            alt={productName}
+            fill
+            priority
+            sizes="(max-width: 1024px) 100vw, 50vw"
+            className="object-contain"
+          />
+        </div>
       </div>
     </div>
   )
