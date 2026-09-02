@@ -132,7 +132,11 @@ export function ChatWidget() {
 
         {/* Input */}
         <div className="border-t bg-white p-3">
-          <form onSubmit={handleSubmit} className="flex gap-2 relative">
+          <form onSubmit={(e) => {
+            e.preventDefault();
+            if (!input?.trim()) return;
+            handleSubmit(e);
+          }} className="flex gap-2 relative">
             <input
               value={input}
               onChange={handleInputChange}
