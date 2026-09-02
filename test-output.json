@@ -1,0 +1,278 @@
+[
+  {
+    "id": "48244cdd-74a9-4c65-a68f-c03ce3e8fb21",
+    "slug": "serum-visage",
+    "name": "Sérum Visage",
+    "categoryId": "0922a90b-5854-4315-b987-7a4d5a50b695",
+    "price": 13500,
+    "oldPrice": 15000,
+    "isNew": false,
+    "inStock": true,
+    "stock": 12,
+    "shortDescription": "Un concentré éclat pour une peau lisse et lumineuse.",
+    "description": "Ce sérum booster d'éclat unifie le teint et affine le grain de peau.",
+    "createdAt": "2026-08-16T14:50:52.692Z",
+    "updatedAt": "2026-08-16T14:50:48.892Z",
+    "images": [
+      {
+        "id": "d8fdb24d-c256-49a5-b7b2-bc1cd3326394",
+        "url": "/images/products/serum-visage.png",
+        "position": 0,
+        "productId": "48244cdd-74a9-4c65-a68f-c03ce3e8fb21"
+      }
+    ]
+  },
+  {
+    "id": "4d46e4a0-b155-4bb6-9a9a-32d4a262605a",
+    "slug": "bracelet-elegance",
+    "name": "Bracelet Élégance",
+    "categoryId": "9017d633-949d-409b-88e2-3a980cf66f90",
+    "price": 10000,
+    "oldPrice": null,
+    "isNew": true,
+    "inStock": true,
+    "stock": 18,
+    "shortDescription": "Bracelet fin doré, une touche discrète et raffinée au quotidien.",
+    "description": "Un bracelet délicat en perles dorées, pensé pour accompagner tous vos looks.",
+    "createdAt": "2026-08-16T14:50:46.877Z",
+    "updatedAt": "2026-08-16T14:50:43.076Z",
+    "images": [
+      {
+        "id": "7d5613d0-924c-4f6f-a2d4-40cf06e486d9",
+        "url": "/images/products/bracelet-elegance.png",
+        "position": 0,
+        "productId": "4d46e4a0-b155-4bb6-9a9a-32d4a262605a"
+      }
+    ]
+  },
+  {
+    "id": "92de93c5-577a-4efd-9ba4-4ef0480c488c",
+    "slug": "rouge-a-levres",
+    "name": "Rouge à Lèvres",
+    "categoryId": "507bfa45-e2ac-4ff1-8901-59619cc9062b",
+    "price": 7000,
+    "oldPrice": null,
+    "isNew": true,
+    "inStock": true,
+    "stock": 28,
+    "shortDescription": "Une teinte nude rosée, confortable et longue tenue.",
+    "description": "Un rouge à lèvres crémeux à la couleur intense et au fini satiné.",
+    "createdAt": "2026-08-16T14:50:51.856Z",
+    "updatedAt": "2026-08-16T14:50:48.058Z",
+    "images": [
+      {
+        "id": "9d452415-56e1-4ea0-8a39-59c0c809dee2",
+        "url": "/images/products/rouge-a-levres.png",
+        "position": 0,
+        "productId": "92de93c5-577a-4efd-9ba4-4ef0480c488c"
+      }
+    ]
+  },
+  {
+    "id": "a4f7dd14-b0b7-439f-8ba2-cace96339380",
+    "slug": "gommage-corps",
+    "name": "Gommage Corps",
+    "categoryId": "0922a90b-5854-4315-b987-7a4d5a50b695",
+    "price": 8500,
+    "oldPrice": null,
+    "isNew": true,
+    "inStock": true,
+    "stock": 19,
+    "shortDescription": "Un gommage doux pour une peau lisse et éclatante.",
+    "description": "Un gommage corps aux grains fins qui élimine les cellules mortes.",
+    "createdAt": "2026-08-16T14:50:54.888Z",
+    "updatedAt": "2026-08-16T14:50:51.088Z",
+    "images": [
+      {
+        "id": "031ad09f-0eb1-46cd-8011-558a302c5039",
+        "url": "/images/products/gommage-corps.png",
+        "position": 0,
+        "productId": "a4f7dd14-b0b7-439f-8ba2-cace96339380"
+      }
+    ]
+  },
+  {
+    "id": "a7df1b1c-a468-47a6-8859-08bf572136e9",
+    "slug": "mascara-volume",
+    "name": "Mascara Volume",
+    "categoryId": "507bfa45-e2ac-4ff1-8901-59619cc9062b",
+    "price": 8500,
+    "oldPrice": 10000,
+    "isNew": false,
+    "inStock": true,
+    "stock": 30,
+    "shortDescription": "Un regard intense et volumineux, sans effet paquet.",
+    "description": "Ce mascara volumateur gaine chaque cil pour un regard profond et défini.",
+    "createdAt": "2026-08-16T14:50:47.753Z",
+    "updatedAt": "2026-08-16T14:50:43.946Z",
+    "images": [
+      {
+        "id": "c7a6fad3-8ca7-4b7d-b9bd-6156c908655b",
+        "url": "/images/products/mascara-volume.png",
+        "position": 0,
+        "productId": "a7df1b1c-a468-47a6-8859-08bf572136e9"
+      }
+    ]
+  },
+  {
+    "id": "b18ad323-33b4-4edd-a116-79ad1f50ce72",
+    "slug": "huile-cheveux",
+    "name": "Huile Cheveux",
+    "categoryId": "507bfa45-e2ac-4ff1-8901-59619cc9062b",
+    "price": 9500,
+    "oldPrice": null,
+    "isNew": false,
+    "inStock": true,
+    "stock": 1,
+    "shortDescription": "Nutrition et brillance pour des cheveux sublimés.",
+    "description": "Une huile capillaire légère qui nourrit les longueurs.",
+    "createdAt": "2026-08-16T14:50:55.636Z",
+    "updatedAt": "2026-08-17T20:36:53.015Z",
+    "images": [
+      {
+        "id": "cmsxp2ncz000004jqog5xkgvu",
+        "url": "/images/products/huile-de-soin.png",
+        "position": 0,
+        "productId": "b18ad323-33b4-4edd-a116-79ad1f50ce72"
+      }
+    ]
+  },
+  {
+    "id": "b2fbd891-2319-42cc-962f-e32ba411ea0e",
+    "slug": "huile-de-soin",
+    "name": "Huile de soin",
+    "categoryId": "0922a90b-5854-4315-b987-7a4d5a50b695",
+    "price": 9000,
+    "oldPrice": null,
+    "isNew": true,
+    "inStock": true,
+    "stock": 25,
+    "shortDescription": "Une huile nourrissante multi-usages pour le visage, le corps et les cheveux.",
+    "description": "Une huile précieuse aux actifs végétaux qui nourrit intensément et sublime la peau.",
+    "createdAt": "2026-08-16T14:50:48.461Z",
+    "updatedAt": "2026-08-16T14:50:44.660Z",
+    "images": [
+      {
+        "id": "f0927834-e792-41f5-b048-e26185b3c986",
+        "url": "/images/products/huile-de-soin.png",
+        "position": 0,
+        "productId": "b2fbd891-2319-42cc-962f-e32ba411ea0e"
+      }
+    ]
+  },
+  {
+    "id": "c338b2c8-d9c4-4901-b217-81c81a884a39",
+    "slug": "foulard-soie",
+    "name": "Foulard Soie",
+    "categoryId": "9017d633-949d-409b-88e2-3a980cf66f90",
+    "price": 12000,
+    "oldPrice": null,
+    "isNew": false,
+    "inStock": true,
+    "stock": 10,
+    "shortDescription": "Un foulard doux aux teintes sauge, chic et polyvalent.",
+    "description": "Un foulard fluide et raffiné qui se porte au cou, dans les cheveux ou noué à un sac.",
+    "createdAt": "2026-08-16T14:50:54.160Z",
+    "updatedAt": "2026-08-16T14:50:50.359Z",
+    "images": [
+      {
+        "id": "0252f64a-9488-4f29-afc7-2ec517d65471",
+        "url": "/images/products/foulard-soie.png",
+        "position": 0,
+        "productId": "c338b2c8-d9c4-4901-b217-81c81a884a39"
+      }
+    ]
+  },
+  {
+    "id": "ce2d4c23-fd4b-4040-a890-d003a8754ad5",
+    "slug": "savon-noir",
+    "name": "Savon Noir",
+    "categoryId": "0922a90b-5854-4315-b987-7a4d5a50b695",
+    "price": 7500,
+    "oldPrice": null,
+    "isNew": false,
+    "inStock": true,
+    "stock": 42,
+    "shortDescription": "Savon noir traditionnel pour une peau nette, douce et purifiée.",
+    "description": "Un savon noir authentique, riche et onctueux, qui nettoie en profondeur tout en respectant l'équilibre de la peau.",
+    "createdAt": "2026-08-16T14:50:46.096Z",
+    "updatedAt": "2026-08-16T14:50:42.297Z",
+    "images": [
+      {
+        "id": "c5b38a8c-8959-4aff-9659-8102332c303e",
+        "url": "/images/products/savon-noir.png",
+        "position": 0,
+        "productId": "ce2d4c23-fd4b-4040-a890-d003a8754ad5"
+      }
+    ]
+  },
+  {
+    "id": "e572231b-59c7-4b07-bd1d-ad17e91a8a48",
+    "slug": "bougie-parfumee",
+    "name": "Bougie Parfumée",
+    "categoryId": "9017d633-949d-409b-88e2-3a980cf66f90",
+    "price": 9500,
+    "oldPrice": null,
+    "isNew": true,
+    "inStock": true,
+    "stock": 22,
+    "shortDescription": "Une ambiance chaleureuse et enveloppante à la maison.",
+    "description": "Une bougie à la cire végétale et au parfum délicat.",
+    "createdAt": "2026-08-16T14:50:53.412Z",
+    "updatedAt": "2026-08-16T14:50:49.615Z",
+    "images": [
+      {
+        "id": "44aad747-e165-4fff-8b43-9aeda2f46af8",
+        "url": "/images/products/bougie-parfumee.png",
+        "position": 0,
+        "productId": "e572231b-59c7-4b07-bd1d-ad17e91a8a48"
+      }
+    ]
+  },
+  {
+    "id": "ebad2fd0-8c55-43a9-8f43-5f0521763dcb",
+    "slug": "creme-hydratante",
+    "name": "Crème Hydratante",
+    "categoryId": "0922a90b-5854-4315-b987-7a4d5a50b695",
+    "price": 11000,
+    "oldPrice": null,
+    "isNew": false,
+    "inStock": true,
+    "stock": 20,
+    "shortDescription": "Hydratation confort 24h pour une peau souple et repulpée.",
+    "description": "Une crème riche et fondante qui restaure la barrière cutanée.",
+    "createdAt": "2026-08-16T14:50:50.125Z",
+    "updatedAt": "2026-08-16T14:50:46.325Z",
+    "images": [
+      {
+        "id": "480bb69e-184d-47f9-98ea-1ae05ac54e8e",
+        "url": "/images/products/creme-hydratante.png",
+        "position": 0,
+        "productId": "ebad2fd0-8c55-43a9-8f43-5f0521763dcb"
+      }
+    ]
+  },
+  {
+    "id": "f59de7aa-5907-4d37-ac1c-6ab308798c73",
+    "slug": "bracelet-perles",
+    "name": "Bracelet Perles",
+    "categoryId": "9017d633-949d-409b-88e2-3a980cf66f90",
+    "price": 8000,
+    "oldPrice": null,
+    "isNew": false,
+    "inStock": true,
+    "stock": 15,
+    "shortDescription": "Bracelet en perles naturelles, élégant et lumineux.",
+    "description": "Un bracelet raffiné en perles naturelles qui apporte une note lumineuse et féminine.",
+    "createdAt": "2026-08-16T14:50:51.109Z",
+    "updatedAt": "2026-08-16T14:50:47.077Z",
+    "images": [
+      {
+        "id": "f28cd4ec-660b-4eac-8933-2357b40bc154",
+        "url": "/images/products/bracelet-perles.png",
+        "position": 0,
+        "productId": "f59de7aa-5907-4d37-ac1c-6ab308798c73"
+      }
+    ]
+  }
+]
