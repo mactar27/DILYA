@@ -30,7 +30,7 @@ export async function CategoryGrid() {
             <Reveal key={cat.slug} delay={i * 80}>
               <Link
                 href={`/categorie/${cat.slug}`}
-                className="group relative flex aspect-[4/5] flex-col justify-end overflow-hidden rounded-t-full rounded-b-2xl bg-secondary"
+                className="group relative flex aspect-[4/5] flex-col justify-end overflow-hidden rounded-2xl bg-secondary"
               >
                 <Image
                   src={cat.image || '/placeholder.svg'}
