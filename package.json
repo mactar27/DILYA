@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@ai-sdk/google": "^4.0.61",
+    "@ai-sdk/react": "^4.0.92",
     "@base-ui/react": "^1.5.0",
     "@prisma/client": "^7.9.1",
     "@tidbcloud/prisma-adapter": "^6.17.0",
