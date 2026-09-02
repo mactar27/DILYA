@@ -10,7 +10,7 @@ import { Button } from '@/components/ui/button'
 export function ChatWidget() {
   const pathname = usePathname()
   const [isOpen, setIsOpen] = useState(false)
-  const { messages, input, handleInputChange, handleSubmit, isLoading, error } = useChat()
+  const { messages, input, handleInputChange, isLoading, error, append, setInput } = useChat()
   const messagesEndRef = useRef<HTMLDivElement>(null)
 
   // Ne pas afficher sur le dashboard admin
@@ -134,8 +134,10 @@ export function ChatWidget() {
         <div className="border-t bg-white p-3">
           <form onSubmit={(e) => {
             e.preventDefault();
-            if (!input?.trim()) return;
-            handleSubmit(e);
+            const text = input?.trim();
+            if (!text) return;
+            append({ role: 'user', content: text });
+            setInput('');
           }} className="flex gap-2 relative">
             <input
               value={input}
