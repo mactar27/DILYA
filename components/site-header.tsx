@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { usePathname } from 'next/navigation'
-import { Search, ShoppingBag, Menu, Truck, Heart, Lock } from 'lucide-react'
+import { Search, ShoppingBag, Menu, Truck, Heart, Lock, Bookmark } from 'lucide-react'
 import {
   Sheet,
   SheetContent,
@@ -183,6 +183,15 @@ export function SiteHeader() {
               onClick={() => setSearchOpen(true)}
             >
               <Search className="h-5 w-5" />
+            </Button>
+
+            <Button
+              variant="ghost"
+              size="icon"
+              className="text-primary hover:text-primary/80"
+              aria-label="Favoris"
+            >
+              <Bookmark className="h-5 w-5" />
             </Button>
 
             <Button
