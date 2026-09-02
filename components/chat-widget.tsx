@@ -144,9 +144,6 @@ export function ChatWidget() {
               <Send className="h-4 w-4" />
             </Button>
           </form>
-          <div className="text-center mt-2">
-            <span className="text-[9px] text-muted-foreground uppercase tracking-wider">Propulsé par Gemini AI</span>
-          </div>
         </div>
       </div>
     </>
