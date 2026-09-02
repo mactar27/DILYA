@@ -89,6 +89,16 @@
   h1, h2, h3, h4 {
     @apply font-serif;
   }
+  
+  /* Hide Safari play button on video when autoplay fails or in Low Power Mode */
+  video::-webkit-media-controls-start-playback-button {
+    display: none !important;
+    -webkit-appearance: none !important;
+  }
+  video::-webkit-media-controls-play-button {
+    display: none !important;
+    -webkit-appearance: none !important;
+  }
 }
 
 @layer utilities {
