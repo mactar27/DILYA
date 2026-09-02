@@ -15,9 +15,9 @@ export function ImageUpload({ onClientUploadComplete, endpoint = "imageUploader"
       <UploadDropzone
         endpoint={endpoint}
         onClientUploadComplete={(res) => {
-          if (res && res[0]) {
-            onClientUploadComplete(res[0].url)
-            toast.success('Image ajoutée avec succès')
+          if (res && res.length > 0) {
+            res.forEach(file => onClientUploadComplete(file.url))
+            toast.success(res.length > 1 ? `${res.length} images ajoutées avec succès` : 'Image ajoutée avec succès')
           }
         }}
         onUploadError={(error: Error) => {
