@@ -8,11 +8,15 @@ export function Hero() {
       {/* Video Background */}
       <video 
         src="/floral_hero.mov" 
+        poster="/floral_hero.png"
         autoPlay 
         loop 
         muted 
         playsInline
-        className="absolute inset-0 w-full h-full object-cover object-center"
+        controls={false}
+        disablePictureInPicture
+        disableRemotePlayback
+        className="absolute inset-0 w-full h-full object-cover object-center pointer-events-none"
       />
       {/* Gradient overlay to ensure text readability */}
       <div className="absolute inset-0 bg-black/10 bg-gradient-to-t from-black/30 via-transparent to-black/10"></div>
