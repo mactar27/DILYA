@@ -54,7 +54,7 @@ export function ProductForm({ categories, initialData }: ProductFormProps) {
     images: initialData?.images.map(i => i.url) || [],
     informations: initialData?.informations.map(i => i.value) || [''],
     sizes: initialData?.sizes ? (JSON.parse(initialData.sizes) as string[]).join(', ') : '',
-    colors: initialData?.colors ? (JSON.parse(initialData.colors) as string[]).join(', ') : ''
+    colors: initialData?.colors ? JSON.parse(initialData.colors) as string[] : []
   })
 
   const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -68,17 +68,17 @@ export function ProductForm({ categories, initialData }: ProductFormProps) {
     }))
   }
 
-  const handleArrayChange = (index: number, field: 'informations', value: string) => {
+  const handleArrayChange = (index: number, field: 'informations' | 'colors', value: string) => {
     const newArray = [...formData[field]]
     newArray[index] = value
     setFormData({ ...formData, [field]: newArray })
   }
 
-  const addArrayItem = (field: 'informations') => {
-    setFormData({ ...formData, [field]: [...formData[field], ''] })
+  const addArrayItem = (field: 'informations' | 'colors') => {
+    setFormData({ ...formData, [field]: [...formData[field], field === 'colors' ? '#000000' : ''] })
   }
 
-  const removeArrayItem = (index: number, field: 'images' | 'informations') => {
+  const removeArrayItem = (index: number, field: 'images' | 'informations' | 'colors') => {
     const newArray = formData[field].filter((_, i) => i !== index)
     setFormData({ ...formData, [field]: newArray })
   }
@@ -101,7 +101,7 @@ export function ProductForm({ categories, initialData }: ProductFormProps) {
       oldPrice: formData.oldPrice ? Number(formData.oldPrice) : null,
       stock: Number(formData.stock),
       sizes: formData.sizes ? JSON.stringify(formData.sizes.split(',').map(s => s.trim()).filter(Boolean)) : null,
-      colors: formData.colors ? JSON.stringify(formData.colors.split(',').map(c => c.trim()).filter(Boolean)) : null,
+      colors: formData.colors.length > 0 ? JSON.stringify(formData.colors.filter(c => c.trim() !== '')) : null,
       images: formData.images.filter(i => i.trim() !== ''),
       informations: formData.informations.filter(i => i.trim() !== '')
     }
@@ -203,8 +203,36 @@ export function ProductForm({ categories, initialData }: ProductFormProps) {
               <Input id="sizes" placeholder="Ex: S, M, L, XL" value={formData.sizes} onChange={(e) => setFormData({...formData, sizes: e.target.value})} />
             </div>
             <div className="space-y-2">
-              <Label htmlFor="colors">Couleurs (Codes Hex séparés par des virgules)</Label>
-              <Input id="colors" placeholder="Ex: #000000, #FFFFFF" value={formData.colors} onChange={(e) => setFormData({...formData, colors: e.target.value})} />
+              <div className="flex justify-between items-center mb-2">
+                <Label>Couleurs (Aperçu visuel)</Label>
+                <Button type="button" variant="outline" size="sm" onClick={() => addArrayItem('colors')} className="h-8">
+                  <Plus className="w-3 h-3 mr-1" /> Ajouter
+                </Button>
+              </div>
+              {formData.colors.length === 0 ? (
+                <p className="text-sm text-muted-foreground italic">Aucune couleur ajoutée.</p>
+              ) : (
+                <div className="flex flex-wrap gap-2">
+                  {formData.colors.map((color, index) => (
+                    <div key={index} className="flex items-center gap-2 bg-secondary/50 rounded-md p-1 pr-2 border">
+                      <input 
+                        type="color" 
+                        value={color} 
+                        onChange={(e) => handleArrayChange(index, 'colors', e.target.value)} 
+                        className="w-8 h-8 rounded cursor-pointer border-0 p-0"
+                      />
+                      <span className="text-xs font-mono uppercase">{color}</span>
+                      <button 
+                        type="button" 
+                        onClick={() => removeArrayItem(index, 'colors')}
+                        className="text-muted-foreground hover:text-destructive ml-1"
+                      >
+                        <X className="w-3 h-3" />
+                      </button>
+                    </div>
+                  ))}
+                </div>
+              )}
             </div>
           </div>
         </div>
