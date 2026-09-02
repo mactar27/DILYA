@@ -36,12 +36,12 @@ export function DashboardChart({ data }: DashboardChartProps) {
             axisLine={false}
             tickLine={false}
             tick={{ fontSize: 12, fill: '#6b7280' }}
-            tickFormatter={(value) => `${value}€`}
+            tickFormatter={(value) => `${value} FCFA`}
           />
           <Tooltip 
             contentStyle={{ borderRadius: '8px', border: '1px solid #e5e7eb', boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1)' }}
             labelStyle={{ fontWeight: 'bold', color: '#111827', marginBottom: '4px' }}
-            formatter={(value: number) => [`${value}€`, 'Ventes']}
+            formatter={(value: number) => [`${value} FCFA`, 'Ventes']}
           />
           <Line 
             type="monotone" 

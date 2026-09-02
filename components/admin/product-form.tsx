@@ -173,11 +173,11 @@ export function ProductForm({ categories, initialData }: ProductFormProps) {
           <h2 className="text-lg font-medium mb-4">Prix et Stock</h2>
           <div className="grid gap-6 md:grid-cols-3">
             <div className="space-y-2">
-              <Label htmlFor="price">Prix (€) *</Label>
+              <Label htmlFor="price">Prix (FCFA) *</Label>
               <Input id="price" type="number" min="0" value={formData.price} onChange={(e) => setFormData({...formData, price: Number(e.target.value)})} required />
             </div>
             <div className="space-y-2">
-              <Label htmlFor="oldPrice">Ancien prix barré (€)</Label>
+              <Label htmlFor="oldPrice">Ancien prix barré (FCFA)</Label>
               <Input id="oldPrice" type="number" min="0" value={formData.oldPrice} onChange={(e) => setFormData({...formData, oldPrice: e.target.value})} />
             </div>
             <div className="space-y-2">
