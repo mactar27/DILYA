@@ -221,7 +221,6 @@ export function ProductForm({ categories, initialData }: ProductFormProps) {
                         onChange={(e) => handleArrayChange(index, 'colors', e.target.value)} 
                         className="w-8 h-8 rounded cursor-pointer border-0 p-0"
                       />
-                      <span className="text-xs font-mono uppercase">{color}</span>
                       <button 
                         type="button" 
                         onClick={() => removeArrayItem(index, 'colors')}
