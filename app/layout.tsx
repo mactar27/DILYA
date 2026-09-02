@@ -5,6 +5,7 @@ import { CartProvider } from '@/lib/cart-context'
 import { SiteHeader } from '@/components/site-header'
 import { SiteFooter } from '@/components/site-footer'
 import { SplashScreen } from '@/components/splash-screen'
+import { ChatWidget } from '@/components/chat-widget'
 import { Toaster } from '@/components/ui/sonner'
 import './globals.css'
 
@@ -55,6 +56,7 @@ export default function RootLayout({
           <SiteFooter />
         </CartProvider>
         <Toaster position="top-center" />
+        <ChatWidget />
         {process.env.NODE_ENV === 'production' && <Analytics />}
       </body>
     </html>
