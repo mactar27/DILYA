@@ -101,9 +101,9 @@ export function SiteHeader() {
                   
                   <div className="px-3 py-2 text-sm font-medium text-muted-foreground mt-2">Catégories</div>
                   <Link href="/categorie/everyday" onClick={() => setMenuOpen(false)} className="rounded-md px-6 py-2 text-base transition-colors hover:bg-secondary">DILYA EVERYDAY</Link>
+                  <Link href="/categorie/move" onClick={() => setMenuOpen(false)} className="rounded-md px-6 py-2 text-base transition-colors hover:bg-secondary">DILYA MOVE</Link>
                   <Link href="/categorie/night" onClick={() => setMenuOpen(false)} className="rounded-md px-6 py-2 text-base transition-colors hover:bg-secondary">DILYA NIGHT</Link>
                   <Link href="/categorie/accessories" onClick={() => setMenuOpen(false)} className="rounded-md px-6 py-2 text-base transition-colors hover:bg-secondary">DILYA ACCESSORIES</Link>
-                  <Link href="/categorie/exclusives" onClick={() => setMenuOpen(false)} className="rounded-md px-6 py-2 text-base transition-colors hover:bg-secondary">DILYA EXCLUSIVES</Link>
                   
                   <div className="my-2 h-px bg-border" />
                   <Link href="/a-propos" onClick={() => setMenuOpen(false)} className="rounded-md px-3 py-3 text-base transition-colors hover:bg-secondary">À propos</Link>
@@ -144,9 +144,9 @@ export function SiteHeader() {
                     </DropdownMenuTrigger>
                     <DropdownMenuContent align="center" className="w-48 bg-background/95 backdrop-blur-md">
                       <DropdownMenuItem><Link href="/categorie/everyday" className="w-full cursor-pointer">DILYA EVERYDAY</Link></DropdownMenuItem>
+                      <DropdownMenuItem><Link href="/categorie/move" className="w-full cursor-pointer">DILYA MOVE</Link></DropdownMenuItem>
                       <DropdownMenuItem><Link href="/categorie/night" className="w-full cursor-pointer">DILYA NIGHT</Link></DropdownMenuItem>
                       <DropdownMenuItem><Link href="/categorie/accessories" className="w-full cursor-pointer">DILYA ACCESSORIES</Link></DropdownMenuItem>
-                      <DropdownMenuItem><Link href="/categorie/exclusives" className="w-full cursor-pointer">DILYA EXCLUSIVES</Link></DropdownMenuItem>
                     </DropdownMenuContent>
                   </DropdownMenu>
                 )

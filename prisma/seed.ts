@@ -4,10 +4,10 @@ import { prisma } from '../lib/db'
 async function main() {
   console.log('🌱 Seeding database...')
   const initialCategories = [
-    { slug: 'everyday', name: 'DILYA EVERYDAY', tagline: 'Les pièces du quotidien, faciles à porter et à associer.', image: '/images/categories/beaute.png' },
-    { slug: 'night', name: 'DILYA NIGHT', tagline: 'Les pièces plus habillées, soirées, sorties, événements.', image: '/images/categories/soins.png' },
-    { slug: 'accessories', name: 'DILYA ACCESSORIES', tagline: 'Les accessoires.', image: '/images/categories/accessoires.png' },
-    { slug: 'exclusives', name: 'DILYA EXCLUSIVES', tagline: 'Pièces exclusives et nouveautés.', image: '/images/categories/nouveautes.png' },
+    { slug: 'everyday', name: 'DILYA Everyday', tagline: 'FOR EVERY DAY', image: '/images/categories/beaute.png' },
+    { slug: 'move', name: 'DILYA Move', tagline: 'MOVE YOUR WAY', image: '/images/categories/nouveautes.png' },
+    { slug: 'night', name: 'DILYA Night', tagline: 'SOFT NIGHTS', image: '/images/categories/soins.png' },
+    { slug: 'accessories', name: 'DILYA Accessories', tagline: 'THE FINISHING TOUCH', image: '/images/categories/accessoires.png' },
   ]
   for (const cat of initialCategories) {
     await prisma.category.upsert({
@@ -92,14 +92,14 @@ async function main() {
   }
 
   const productsToSeed = [
-    { id: 'p1', slug: 'robe-elegante', name: 'Robe Élégante', categorySlug: 'night', price: 25000, isNew: false, inStock: true, stock: 42, shortDescription: 'Une robe noire classique pour vos soirées.', description: "Parfaite pour toutes les occasions habillées.", informations: ['Taille: S, M, L'], images: ['/placeholder.svg'], sizes: ['S', 'M', 'L'], colors: ['#000000', '#800020'] },
-    { id: 'p2', slug: 'bracelet-elegance', name: 'Bracelet Élégance', categorySlug: 'accessories', price: 10000, isNew: true, inStock: true, stock: 18, shortDescription: 'Bracelet fin doré, une touche discrète et raffinée au quotidien.', description: 'Un bracelet délicat en perles dorées, pensé pour accompagner tous vos looks.', informations: ['Finition dorée'], images: ['/placeholder.svg'], colors: ['#FFD700', '#C0C0C0'] },
-    { id: 'p3', slug: 'ensemble-casual', name: 'Ensemble Casual', categorySlug: 'everyday', price: 18500, oldPrice: 20000, isNew: false, inStock: true, stock: 30, shortDescription: 'Un ensemble confortable pour tous les jours.', description: "Le choix parfait pour le confort et le style au quotidien.", informations: ['Taille: S, M, L, XL'], images: ['/placeholder.svg'], sizes: ['S', 'M', 'L', 'XL'], colors: ['#F5F5DC', '#A9A9A9'] },
-    { id: 'p4', slug: 'sac-cuir', name: 'Sac en Cuir', categorySlug: 'accessories', price: 35000, isNew: true, inStock: true, stock: 25, shortDescription: 'Sac pratique et chic.', description: 'Un indispensable pour transporter vos affaires avec style.', informations: ['Matière: Simili cuir'], images: ['/placeholder.svg'], colors: ['#8B4513', '#000000'] },
-    { id: 'p5', slug: 't-shirt-basique', name: 'T-Shirt Basique', categorySlug: 'everyday', price: 11000, isNew: false, inStock: true, stock: 20, shortDescription: 'Le t-shirt blanc indispensable.', description: "S'accorde avec tout, parfait pour le style DILYA EVERYDAY.", informations: ['Coton 100%'], images: ['/placeholder.svg'], sizes: ['XS', 'S', 'M', 'L'], colors: ['#FFFFFF', '#000000'] },
-    { id: 'p6', slug: 'pantalon-fluide', name: 'Pantalon Fluide', categorySlug: 'everyday', price: 22500, isNew: true, inStock: true, stock: 19, shortDescription: 'Pantalon taille haute fluide.', description: 'Confort et style réunis.', informations: ['Léger', 'Couleur beige'], images: ['/placeholder.svg'], sizes: ['S', 'M', 'L'], colors: ['#F5F5DC', '#000000', '#808080'] },
-    { id: 'p7', slug: 'robe-paillettes', name: 'Robe Paillettes', categorySlug: 'night', price: 45000, isNew: true, inStock: true, stock: 28, shortDescription: 'Pour briller en soirée.', description: "Attirez tous les regards avec cette robe exclusive.", informations: ['Fini brillant'], images: ['/placeholder.svg'], sizes: ['S', 'M', 'L'], colors: ['#C0C0C0', '#FFD700'] },
-    { id: 'p8', slug: 'blazer-chic', name: 'Blazer Chic', categorySlug: 'exclusives', price: 55000, oldPrice: 65000, isNew: false, inStock: true, stock: 12, shortDescription: 'Le blazer coupe droite.', description: "Coupe impeccable pour un look structuré et moderne.", informations: ['Entretien: Nettoyage à sec'], images: ['/placeholder.svg'], sizes: ['S', 'M', 'L'], colors: ['#000000', '#F5F5DC'] },
+    { id: 'p1', slug: 'pyjama-soie', name: 'Pyjama en Soie', categorySlug: 'night', price: 10000, isNew: false, inStock: true, stock: 42, shortDescription: 'Pour des nuits douces.', description: "Parfait pour se prélasser.", informations: ['Taille: S, M, L'], images: ['/placeholder.svg'], sizes: ['S', 'M', 'L'], colors: ['#000000', '#800020'] },
+    { id: 'p2', slug: 'bague-fine', name: 'Bague Fine', categorySlug: 'accessories', price: 3000, isNew: true, inStock: true, stock: 18, shortDescription: 'Bague dorée.', description: 'Une bague délicate.', informations: ['Finition dorée'], images: ['/placeholder.svg'], colors: ['#FFD700'] },
+    { id: 'p3', slug: 'ensemble-sport', name: 'Ensemble Sport', categorySlug: 'move', price: 10000, oldPrice: 12000, isNew: false, inStock: true, stock: 30, shortDescription: 'Confort et maintien.', description: "Le choix parfait pour le sport.", informations: ['Taille: S, M, L'], images: ['/placeholder.svg'], sizes: ['S', 'M', 'L'], colors: ['#000000', '#A9A9A9'] },
+    { id: 'p4', slug: 'collier-minimal', name: 'Collier Minimaliste', categorySlug: 'accessories', price: 4500, isNew: true, inStock: true, stock: 25, shortDescription: 'Collier pratique et chic.', description: 'Un indispensable.', informations: ['Matière: Acier inoxydable'], images: ['/placeholder.svg'], colors: ['#FFD700', '#C0C0C0'] },
+    { id: 'p5', slug: 't-shirt-everyday', name: 'T-Shirt Everyday', categorySlug: 'everyday', price: 12500, isNew: false, inStock: true, stock: 20, shortDescription: 'Le t-shirt blanc.', description: "S'accorde avec tout.", informations: ['Coton 100%'], images: ['/placeholder.svg'], sizes: ['XS', 'S', 'M', 'L'], colors: ['#FFFFFF', '#000000'] },
+    { id: 'p6', slug: 'pantalon-cargo', name: 'Pantalon Cargo', categorySlug: 'everyday', price: 15000, isNew: true, inStock: true, stock: 19, shortDescription: 'Pantalon cargo confortable.', description: 'Confort et style réunis.', informations: ['Couleur beige'], images: ['/placeholder.svg'], sizes: ['S', 'M', 'L'], colors: ['#F5F5DC', '#000000'] },
+    { id: 'p7', slug: 'nuisette-dentelle', name: 'Nuisette Dentelle', categorySlug: 'night', price: 10000, isNew: true, inStock: true, stock: 28, shortDescription: 'Douceur et légèreté.', description: "Nuisette confortable.", informations: ['Fini brillant'], images: ['/placeholder.svg'], sizes: ['S', 'M', 'L'], colors: ['#C0C0C0', '#000000'] },
+    { id: 'p8', slug: 'legging-move', name: 'Legging Move', categorySlug: 'move', price: 8500, isNew: false, inStock: true, stock: 12, shortDescription: 'Legging stretch.', description: "Coupe impeccable pour le sport.", informations: ['Entretien: Lavage à froid'], images: ['/placeholder.svg'], sizes: ['S', 'M', 'L'], colors: ['#000000', '#0000FF'] },
   ]
 
   // On supprime d'abord tous les produits pour repartir sur une base propre
