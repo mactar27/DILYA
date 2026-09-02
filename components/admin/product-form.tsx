@@ -30,6 +30,8 @@ interface ProductFormProps {
     description: string
     images: { url: string }[]
     informations: { value: string }[]
+    sizes: string | null
+    colors: string | null
   }
 }
 
@@ -50,7 +52,9 @@ export function ProductForm({ categories, initialData }: ProductFormProps) {
     shortDescription: initialData?.shortDescription || '',
     description: initialData?.description || '',
     images: initialData?.images.map(i => i.url) || [],
-    informations: initialData?.informations.map(i => i.value) || ['']
+    informations: initialData?.informations.map(i => i.value) || [''],
+    sizes: initialData?.sizes ? (JSON.parse(initialData.sizes) as string[]).join(', ') : '',
+    colors: initialData?.colors ? (JSON.parse(initialData.colors) as string[]).join(', ') : ''
   })
 
   const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -96,6 +100,8 @@ export function ProductForm({ categories, initialData }: ProductFormProps) {
       price: Number(formData.price),
       oldPrice: formData.oldPrice ? Number(formData.oldPrice) : null,
       stock: Number(formData.stock),
+      sizes: formData.sizes ? JSON.stringify(formData.sizes.split(',').map(s => s.trim()).filter(Boolean)) : null,
+      colors: formData.colors ? JSON.stringify(formData.colors.split(',').map(c => c.trim()).filter(Boolean)) : null,
       images: formData.images.filter(i => i.trim() !== ''),
       informations: formData.informations.filter(i => i.trim() !== '')
     }
@@ -188,6 +194,17 @@ export function ProductForm({ categories, initialData }: ProductFormProps) {
             <div className="flex items-center space-x-2">
               <Checkbox id="isNew" checked={formData.isNew} onCheckedChange={(c) => setFormData({...formData, isNew: c as boolean})} />
               <Label htmlFor="isNew">Badge "Nouveau"</Label>
+            </div>
+          </div>
+          
+          <div className="grid gap-6 md:grid-cols-2 mt-6">
+            <div className="space-y-2">
+              <Label htmlFor="sizes">Tailles (séparées par des virgules)</Label>
+              <Input id="sizes" placeholder="Ex: S, M, L, XL" value={formData.sizes} onChange={(e) => setFormData({...formData, sizes: e.target.value})} />
+            </div>
+            <div className="space-y-2">
+              <Label htmlFor="colors">Couleurs (Codes Hex séparés par des virgules)</Label>
+              <Input id="colors" placeholder="Ex: #000000, #FFFFFF" value={formData.colors} onChange={(e) => setFormData({...formData, colors: e.target.value})} />
             </div>
           </div>
         </div>
