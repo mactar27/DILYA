@@ -103,10 +103,19 @@ export function ChatWidget() {
                   )}
                   style={{ whiteSpace: 'pre-wrap' }}
                 >
-                  {/* On remplace les marqueurs markdown de base (**) par des spans gras */}
-                  {m.content.split('**').map((part, i) => 
-                    i % 2 === 1 ? <strong key={i}>{part}</strong> : <span key={i}>{part}</span>
-                  )}
+                  {/* On gère les parts au lieu de content (Vercel AI SDK 7) */}
+                  {m.parts?.map((part, pIdx) => {
+                    if (part.type === 'text') {
+                      return (
+                        <span key={pIdx}>
+                          {part.text.split('**').map((textPart, i) => 
+                            i % 2 === 1 ? <strong key={i}>{textPart}</strong> : <span key={i}>{textPart}</span>
+                          )}
+                        </span>
+                      )
+                    }
+                    return null
+                  })}
                 </div>
               </div>
             ))
@@ -144,7 +153,7 @@ export function ChatWidget() {
                   e.preventDefault();
                   const text = localInput.trim();
                   if (!text || isLoading) return;
-                  sendMessage({ role: 'user', content: text });
+                  sendMessage({ role: 'user', parts: [{ type: 'text', text }] });
                   setLocalInput('');
                 }
               }}
@@ -158,7 +167,7 @@ export function ChatWidget() {
                 e.preventDefault();
                 const text = localInput.trim();
                 if (!text || isLoading) return;
-                sendMessage({ role: 'user', content: text });
+                sendMessage({ role: 'user', parts: [{ type: 'text', text }] });
                 setLocalInput('');
               }}
               size="icon"
