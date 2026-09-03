@@ -1,55 +1,12 @@
 'use client'
-import { useState } from 'react'
+
 import Image from 'next/image'
 import Link from 'next/link'
-import { ShoppingBag } from 'lucide-react'
-import { toast } from 'sonner'
 import { cn } from '@/lib/utils'
 import { formatPrice } from '@/lib/format'
-import { useCart } from '@/lib/cart-context'
 import type { Product } from '@/lib/products'
 
 export function ProductCard({ product }: { product: Product }) {
-  const { addItem } = useCart()
-
-  const [selectedSize, setSelectedSize] = useState<string | null>(null)
-  const [selectedColor, setSelectedColor] = useState<string | null>(null)
-
-  function handleAdd(e: React.MouseEvent) {
-    e.preventDefault()
-    e.stopPropagation()
-    if (!product.inStock) return
-    
-    if (product.sizes && product.sizes.length > 0 && !selectedSize) {
-      toast.error('Veuillez sélectionner une taille')
-      return
-    }
-
-    if (product.colors && product.colors.length > 0 && !selectedColor) {
-      toast.error('Veuillez sélectionner une couleur')
-      return
-    }
-
-    let combinedVariant = undefined
-    if (selectedSize && selectedColor) {
-      combinedVariant = `${selectedSize} - ${selectedColor}`
-    } else if (selectedSize) {
-      combinedVariant = selectedSize
-    } else if (selectedColor) {
-      combinedVariant = selectedColor
-    }
-
-    addItem({
-      id: product.id,
-      slug: product.slug,
-      name: product.name,
-      price: product.price,
-      image: product.images[0],
-      variant: combinedVariant
-    })
-    toast.success(`${product.name} ajouté au panier`)
-  }
-
   const discount = product.oldPrice
     ? Math.round(((product.oldPrice - product.price) / product.oldPrice) * 100)
     : 0
@@ -89,7 +46,7 @@ export function ProductCard({ product }: { product: Product }) {
         )}
       </div>
 
-      <div className="mt-4 flex flex-col gap-2 flex-1 px-1">
+      <div className="mt-4 flex flex-col gap-2 flex-1 px-1 pb-3">
         <h3 className="text-xs font-semibold leading-snug text-foreground/80">{product.name}</h3>
         <div className="flex items-center gap-2 mb-2">
           <span className="text-sm font-bold text-foreground tabular-nums">{formatPrice(product.price)}</span>
@@ -101,56 +58,22 @@ export function ProductCard({ product }: { product: Product }) {
         </div>
         
         {product.colors && product.colors.length > 0 && (
-          <div className="flex gap-1 mb-2 relative z-10">
+          <div className="flex gap-1 mb-2">
             {product.colors.map((color, idx) => (
-              <button 
-                key={idx} 
-                onClick={(e) => {
-                  e.preventDefault()
-                  e.stopPropagation()
-                  setSelectedColor(color)
-                }}
-                className={cn(
-                  "w-4 h-4 rounded-full border shadow-sm transition-transform hover:scale-110",
-                  selectedColor === color ? "ring-2 ring-primary ring-offset-1 border-transparent" : "border-black/10"
-                )} 
-                style={{ backgroundColor: color }}
-                aria-label={`Couleur ${color}`}
-              />
+              <span key={idx} className="w-3.5 h-3.5 rounded-full border border-black/10 shadow-sm" style={{ backgroundColor: color }}></span>
             ))}
           </div>
         )}
 
         {product.sizes && product.sizes.length > 0 && (
-          <div className="flex gap-1 mb-3 flex-wrap relative z-10">
+          <div className="flex gap-1 mb-1 flex-wrap">
             {product.sizes.map((size, idx) => (
-              <button 
-                key={idx}
-                onClick={(e) => {
-                  e.preventDefault()
-                  e.stopPropagation()
-                  setSelectedSize(size)
-                }}
-                className={cn(
-                  "px-2 py-1 text-[10px] sm:text-xs font-bold rounded-md border transition-colors",
-                  selectedSize === size 
-                    ? "bg-primary text-primary-foreground border-primary" 
-                    : "bg-white text-foreground/70 border-black/5 hover:border-primary/50"
-                )}
-              >
+              <span key={idx} className="px-1.5 py-0.5 text-[9px] font-bold text-foreground/70 bg-white rounded-[4px] border border-black/5">
                 {size}
-              </button>
+              </span>
             ))}
           </div>
         )}
-        
-        <button
-          onClick={handleAdd}
-          disabled={!product.inStock}
-          className="relative z-10 mt-auto flex w-full items-center justify-center rounded-xl bg-[#e2959c] py-3 text-white transition-transform hover:scale-[1.02] active:scale-[0.98] disabled:opacity-50 disabled:hover:scale-100"
-        >
-          <ShoppingBag className="h-[18px] w-[18px]" strokeWidth={2.5} />
-        </button>
       </div>
     </Link>
   )

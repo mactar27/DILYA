@@ -27,63 +27,55 @@ const SnapchatIcon = ({ className }: { className?: string }) => (
 )
 
 export function SiteFooter() {
+  const [email, setEmail] = useState('')
+  const [isLoading, setIsLoading] = useState(false)
+
+  const handleSubscribe = async (e: React.FormEvent) => {
+    e.preventDefault()
+    setIsLoading(true)
+    try {
+      await subscribeToNewsletter(email)
+      toast.success('Inscrit avec succès !')
+      setEmail('')
+    } catch (error) {
+      toast.error("Erreur lors de l'inscription")
+    } finally {
+      setIsLoading(false)
+    }
+  }
+
   const pathname = usePathname()
   if (pathname?.startsWith('/admin')) return null
 
   return (
-    <footer className="mt-16 bg-[#e2959c] text-white overflow-hidden relative rounded-t-[32px] md:rounded-t-[48px]">
-      <div className="mx-auto max-w-7xl px-6 py-16 lg:px-8">
-        <div className="grid gap-12 lg:grid-cols-12 lg:gap-8">
-          {/* Logo Column */}
-          <div className="lg:col-span-2 flex flex-col items-center lg:items-start text-center lg:text-left mb-6 lg:mb-0">
-            <Link href="/" className="flex items-center gap-1 relative inline-block">
-              <span className="font-script text-[4.5rem] text-white font-normal leading-none drop-shadow-sm">Dilya</span>
-              <span className="text-3xl relative top-2 opacity-90 drop-shadow-sm">🌸</span>
-            </Link>
-          </div>
+    <footer className="mt-16 bg-[#1a1a1a] text-white overflow-hidden relative rounded-t-[32px] md:rounded-t-[48px]">
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute -top-[20%] -right-[10%] w-[50%] h-[50%] rounded-full bg-primary/5 blur-[120px] mix-blend-screen" />
+        <div className="absolute -bottom-[20%] -left-[10%] w-[50%] h-[50%] rounded-full bg-primary/5 blur-[120px] mix-blend-screen" />
+      </div>
 
-          {/* Links Columns */}
-          <div className="grid grid-cols-2 gap-8 sm:grid-cols-4 lg:col-span-6">
-            <div>
-              <h3 className="font-sans text-sm font-semibold text-white">Boutique</h3>
-              <ul className="mt-4 flex flex-col gap-3 text-xs text-primary-foreground/70">
-                <li><Link href="/categorie/everyday" className="hover:text-white">Everyday</Link></li>
-                <li><Link href="/categorie/night" className="hover:text-white">Night</Link></li>
-                <li><Link href="/categorie/accessories" className="hover:text-white">Accessories</Link></li>
-                <li><Link href="/categorie/nouveautes" className="hover:text-white">Nouveautés</Link></li>
-              </ul>
-            </div>
-            <div>
-              <h3 className="font-sans text-sm font-semibold text-white">À propos</h3>
-              <ul className="mt-4 flex flex-col gap-3 text-xs text-primary-foreground/70">
-                <li><Link href="/notre-histoire" className="hover:text-white">Notre histoire</Link></li>
-                <li><Link href="/valeurs" className="hover:text-white">Nos valeurs</Link></li>
-                <li><Link href="/journal" className="hover:text-white">Journal</Link></li>
-                <li><Link href="/faq" className="hover:text-white">FAQ</Link></li>
-              </ul>
-            </div>
-            <div>
-              <h3 className="font-sans text-sm font-semibold text-white">Aide</h3>
-              <ul className="mt-4 flex flex-col gap-3 text-xs text-primary-foreground/70">
-                <li><Link href="/livraison" className="hover:text-white">Livraison</Link></li>
-                <li><Link href="/retours" className="hover:text-white">Retours</Link></li>
-                <li><Link href="/guide-des-tailles" className="hover:text-white">Guide des tailles</Link></li>
-                <li><Link href="/contact" className="hover:text-white">Contact</Link></li>
-              </ul>
-            </div>
-            <div className="flex flex-col items-center sm:items-start">
-              <h3 className="font-sans text-[13px] font-bold uppercase tracking-wider text-white relative inline-block">
+      <div className="mx-auto max-w-7xl px-6 py-16 lg:px-8 relative">
+        <div className="grid gap-12 lg:grid-cols-12 lg:gap-8">
+          {/* Main Info Column */}
+          <div className="flex flex-col gap-8 lg:col-span-4 text-center lg:text-left items-center lg:items-start">
+            <Link href="/" className="inline-block transition-transform hover:scale-105 active:scale-95 w-fit">
+              <span className="font-serif text-3xl font-bold tracking-tight text-white drop-shadow-sm">Dilya🌸</span>
+            </Link>
             <p className="text-[13px] leading-relaxed text-white/70 max-w-sm">
               L'élégance minimaliste pour la femme moderne. Des pièces intemporelles conçues avec passion.
             </p>
             <div className="flex gap-4">
-              <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="flex h-10 w-10 items-center justify-center rounded-full bg-white/5 border border-white/10 text-white transition-all hover:bg-white hover:text-black hover:scale-110">
-                <Instagram className="h-4 w-4" />
+              <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="flex h-10 w-10 items-center justify-center rounded-full bg-white/5 border border-white/10 text-white transition-all hover:bg-white hover:text-[#e2959c] hover:scale-110">
+                <InstagramIcon className="h-4 w-4" />
                 <span className="sr-only">Instagram</span>
               </a>
-              <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="flex h-10 w-10 items-center justify-center rounded-full bg-white/5 border border-white/10 text-white transition-all hover:bg-white hover:text-black hover:scale-110">
-                <Facebook className="h-4 w-4" />
-                <span className="sr-only">Facebook</span>
+              <a href="https://tiktok.com" target="_blank" rel="noopener noreferrer" className="flex h-10 w-10 items-center justify-center rounded-full bg-white/5 border border-white/10 text-white transition-all hover:bg-white hover:text-[#e2959c] hover:scale-110">
+                <TikTokIcon className="h-4 w-4" />
+                <span className="sr-only">TikTok</span>
+              </a>
+              <a href="https://snapchat.com" target="_blank" rel="noopener noreferrer" className="flex h-10 w-10 items-center justify-center rounded-full bg-white/5 border border-white/10 text-white transition-all hover:bg-white hover:text-[#e2959c] hover:scale-110">
+                <SnapchatIcon className="h-4 w-4" />
+                <span className="sr-only">Snapchat</span>
               </a>
             </div>
           </div>
@@ -122,7 +114,7 @@ export function SiteFooter() {
           </div>
 
           {/* Newsletter Column */}
-          <div className="lg:col-span-4 bg-white/5 rounded-3xl p-8 lg:ml-auto border border-white/10 text-center lg:text-left shadow-sm">
+          <div className="lg:col-span-4 bg-white/5 rounded-3xl p-8 border border-white/10 text-center lg:text-left shadow-sm">
             <h3 className="font-serif text-[22px] font-medium text-white mb-3">Rejoins l'univers DILYA</h3>
             <p className="text-[11px] leading-relaxed text-white/80 max-w-xs mx-auto lg:mx-0">
               Sois la première informée des nouveautés et offres exclusives.
