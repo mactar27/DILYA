@@ -102,12 +102,12 @@ export function SiteFooter() {
         </div>
 
         {/* Bottom Bar */}
-        <div className="mt-16 flex flex-col items-center justify-between border-t border-white/15 pt-8 text-[9px] text-white/60 sm:flex-row">
+        <div className="mt-16 flex flex-col items-center justify-between border-t border-white/15 pt-8 text-xs text-white/60 sm:flex-row">
           <div className="flex flex-col sm:flex-row items-center gap-2 sm:gap-6 text-center sm:text-left mb-4 sm:mb-0">
             <p>© {new Date().getFullYear()} DILYA — Tous droits réservés.</p>
             <p>
-              Fait avec amour au Sénégal.
-              <a href="https://wockytech.xyz" target="_blank" rel="noopener noreferrer" className="hover:text-white underline underline-offset-2 transition-colors">
+              Fait avec amour au Sénégal. {' '}
+              <a href="https://wockytech.xyz" target="_blank" rel="noopener noreferrer" className="font-medium hover:text-white underline underline-offset-2 transition-colors">
                 WockyTech
               </a>
             </p>
