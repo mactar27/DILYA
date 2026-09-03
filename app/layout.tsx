@@ -33,6 +33,9 @@ export const metadata: Metadata = {
   title: 'DILYA — Beauté, accessoires et essentiels',
   description:
     'Boutique en ligne de produits de beauté, accessoires et lifestyle sélectionnés avec soin. Commandez directement en ligne, livraison internationale.',
+  icons: {
+    icon: 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><text y=".9em" font-size="90">🌸</text></svg>',
+  },
   generator: 'v0.app',
 }
 

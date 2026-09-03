@@ -3,11 +3,13 @@
 import { useState } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
-import { usePathname } from 'next/navigation'
+import { usePathname, useRouter } from 'next/navigation'
 import { LayoutDashboard, ShoppingBag, Users, Package, Settings, LogOut, MessageSquare, Menu, FileText } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { Sheet, SheetContent, SheetTrigger, SheetHeader, SheetTitle } from '@/components/ui/sheet'
 import { Button } from '@/components/ui/button'
+import { logoutAdmin } from '@/app/actions'
+import { toast } from 'sonner'
 
 const navItems = [
   { href: '/admin', label: 'Tableau de bord', icon: LayoutDashboard },
@@ -26,6 +28,19 @@ const navItems = [
 export function MobileAdminNav() {
   const pathname = usePathname()
   const [open, setOpen] = useState(false)
+  const router = useRouter()
+
+  const handleLogout = async () => {
+    try {
+      await logoutAdmin()
+      toast.success('Déconnecté')
+      setOpen(false)
+      router.push('/admin/login')
+      router.refresh()
+    } catch (err) {
+      toast.error('Erreur lors de la déconnexion')
+    }
+  }
 
   return (
     <div className="md:hidden border-b bg-background flex items-center justify-between p-4 sticky top-0 z-40">
@@ -34,8 +49,10 @@ export function MobileAdminNav() {
       </Link>
       
       <Sheet open={open} onOpenChange={setOpen}>
-        <SheetTrigger render={<Button variant="outline" size="icon" />}>
-          <Menu className="h-5 w-5" />
+        <SheetTrigger asChild>
+          <Button variant="outline" size="icon">
+            <Menu className="h-5 w-5" />
+          </Button>
         </SheetTrigger>
         <SheetContent side="left" className="w-64 p-0">
           <SheetHeader className="border-b p-4 text-left">
@@ -66,7 +83,10 @@ export function MobileAdminNav() {
               })}
             </nav>
             <div className="mt-auto pt-4">
-              <button className="flex w-full items-center gap-3 rounded-md px-3 py-2 text-sm font-medium text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground">
+              <button 
+                onClick={handleLogout}
+                className="flex w-full items-center gap-3 rounded-md px-3 py-2 text-sm font-medium text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground"
+              >
                 <LogOut className="h-4 w-4" />
                 Déconnexion
               </button>

@@ -2,9 +2,11 @@
 
 import Link from 'next/link'
 import Image from 'next/image'
-import { usePathname } from 'next/navigation'
+import { usePathname, useRouter } from 'next/navigation'
 import { LayoutDashboard, ShoppingBag, Users, Package, Settings, LogOut, MessageSquare, FileText } from 'lucide-react'
 import { cn } from '@/lib/utils'
+import { logoutAdmin } from '@/app/actions'
+import { toast } from 'sonner'
 
 const navItems = [
   { href: '/admin', label: 'Tableau de bord', icon: LayoutDashboard },
@@ -22,6 +24,18 @@ const navItems = [
 
 export function AdminSidebar() {
   const pathname = usePathname()
+  const router = useRouter()
+
+  const handleLogout = async () => {
+    try {
+      await logoutAdmin()
+      toast.success('Déconnecté')
+      router.push('/admin/login')
+      router.refresh()
+    } catch (err) {
+      toast.error('Erreur lors de la déconnexion')
+    }
+  }
 
   return (
     <aside className="fixed bottom-0 left-0 top-0 z-40 hidden w-64 flex-col border-r bg-background md:flex">
@@ -56,7 +70,10 @@ export function AdminSidebar() {
         </nav>
         
         <div className="mt-auto pt-4">
-          <button className="flex w-full items-center gap-3 rounded-md px-3 py-2 text-sm font-medium text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground">
+          <button 
+            onClick={handleLogout}
+            className="flex w-full items-center gap-3 rounded-md px-3 py-2 text-sm font-medium text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground"
+          >
             <LogOut className="h-4 w-4" />
             Déconnexion
           </button>

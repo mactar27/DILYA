@@ -4,8 +4,29 @@ import { searchProducts, getCategories } from '@/lib/products'
 import { prisma } from '@/lib/db'
 import { revalidatePath } from 'next/cache'
 import { Resend } from 'resend'
+import { cookies } from 'next/headers'
 
 const resend = new Resend(process.env.RESEND_API_KEY)
+
+export async function loginAdmin(code: string) {
+  if (code === '3577') {
+    const cookieStore = await cookies()
+    cookieStore.set('admin_session', 'authenticated', {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === 'production',
+      maxAge: 60 * 60 * 24 * 7, // 7 days
+      path: '/',
+    })
+    return { success: true }
+  }
+  return { error: 'Code incorrect' }
+}
+
+export async function logoutAdmin() {
+  const cookieStore = await cookies()
+  cookieStore.delete('admin_session')
+  return { success: true }
+}
 
 export async function searchProductsAction(query: string) {
   return searchProducts(query)
