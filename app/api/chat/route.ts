@@ -57,7 +57,7 @@ Instructions:
   } catch (error) {
     console.error('Chat API Error:', error)
     return new Response(
-      JSON.stringify({ error: 'Une erreur est survenue lors de la communication avec l\'assistant.' }), 
+      JSON.stringify({ error: error instanceof Error ? error.message : String(error) }), 
       { status: 500, headers: { 'Content-Type': 'application/json' } }
     )
   }

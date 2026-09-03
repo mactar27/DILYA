@@ -127,7 +127,7 @@ export function ChatWidget() {
           )}
           {error && (
             <div className="mx-auto my-2 rounded-lg bg-red-50 p-3 text-center text-xs text-red-500 border border-red-100 max-w-[85%]">
-              Oups ! L'assistante n'a pas pu répondre. (Avez-vous bien ajouté la clé API sur Vercel ?)
+              {error.message || "Oups ! L'assistante n'a pas pu répondre. (Avez-vous bien ajouté la clé API sur Vercel ?)"}
             </div>
           )}
           <div ref={messagesEndRef} />
