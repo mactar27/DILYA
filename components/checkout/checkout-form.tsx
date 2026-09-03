@@ -46,6 +46,7 @@ export function CheckoutForm() {
   const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
+    email: '',
     phone: '',
     city: '',
     address: '',
@@ -76,6 +77,10 @@ export function CheckoutForm() {
                 <div className="space-y-2">
                   <Label htmlFor="lastName">Nom complet</Label>
                   <Input id="lastName" value={formData.lastName} onChange={handleChange} placeholder="Votre nom" />
+                </div>
+                <div className="space-y-2 sm:col-span-2">
+                  <Label htmlFor="email">Adresse e-mail (pour le reçu)</Label>
+                  <Input id="email" type="email" value={formData.email} onChange={handleChange} placeholder="exemple@email.com" />
                 </div>
                 <div className="space-y-2 sm:col-span-2">
                   <Label htmlFor="phone">Téléphone</Label>

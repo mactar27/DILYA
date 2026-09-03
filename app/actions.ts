@@ -261,6 +261,7 @@ export async function createOrder(data: any) {
     })
 
     if (process.env.RESEND_API_KEY) {
+      // 1. Email to Admin
       await resend.emails.send({
         from: 'DILYA Boutique <onboarding@resend.dev>',
         to: 'Attoufanemaiga60@gmail.com', // To the admin
@@ -270,6 +271,7 @@ export async function createOrder(data: any) {
           <p><strong>Email :</strong> ${order.email}</p>
           <p><strong>Téléphone :</strong> ${order.phone}</p>
           <p><strong>Total :</strong> ${order.subtotal} FCFA</p>
+          <p><strong>Paiement / Notes :</strong> ${complementStr}</p>
           <br/>
           <h2>Détails de livraison</h2>
           <p>${order.address}<br/>${order.city}, ${order.country}</p>
@@ -277,6 +279,41 @@ export async function createOrder(data: any) {
           <p>Connectez-vous à l'administration pour voir les détails de la commande.</p>
         `
       })
+
+      // 2. Email to Customer
+      if (order.email) {
+        let paymentInstruction = ''
+        if (paymentMethod === 'Wave') {
+          paymentInstruction = `<p style="color: #1dc3f5; font-weight: bold;">Vous avez choisi le paiement par Wave. Notre équipe va vous contacter dans quelques instants au ${order.phone} pour procéder au règlement sécurisé.</p>`
+        } else if (paymentMethod === 'Orange Money') {
+          paymentInstruction = `<p style="color: #f16e00; font-weight: bold;">Vous avez choisi le paiement par Orange Money. Notre équipe va vous contacter dans quelques instants au ${order.phone} pour procéder au règlement sécurisé.</p>`
+        } else {
+          paymentInstruction = `<p>Vous avez choisi le paiement en espèces. Préparez la somme exacte lors de la livraison.</p>`
+        }
+
+        await resend.emails.send({
+          from: 'DILYA Boutique <onboarding@resend.dev>',
+          to: order.email,
+          subject: 'Votre commande DILYA est confirmée ! 🎉',
+          html: `
+            <div style="font-family: sans-serif; max-width: 600px; margin: 0 auto; color: #333;">
+              <h1 style="color: #e2959c;">Merci pour votre commande, ${order.firstName} !</h1>
+              <p>Nous avons bien reçu votre commande et nous la préparons avec amour. 💕</p>
+              
+              <div style="background-color: #f9f9f9; padding: 20px; border-radius: 12px; margin: 20px 0;">
+                <h3 style="margin-top: 0;">Informations importantes</h3>
+                ${paymentInstruction}
+                <p><strong>Montant total à régler :</strong> ${order.subtotal} FCFA</p>
+              </div>
+
+              <p>Nous vous tiendrons informée de l'expédition de votre colis.</p>
+              <br/>
+              <p>Avec amour,</p>
+              <p><strong>L'équipe DILYA</strong></p>
+            </div>
+          `
+        })
+      }
     }
 
     revalidatePath('/admin/commandes')
