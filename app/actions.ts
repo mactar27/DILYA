@@ -390,3 +390,47 @@ export async function deletePage(id: string) {
   }
 }
 
+// ---------------------------------------------------------------------------
+// Newsletter
+// ---------------------------------------------------------------------------
+
+export async function subscribeToNewsletter(email: string) {
+  try {
+    const existing = await prisma.subscriber.findUnique({
+      where: { email },
+    })
+
+    if (existing) {
+      return { error: 'Cette adresse e-mail est déjà inscrite.' }
+    }
+
+    await prisma.subscriber.create({
+      data: { email },
+    })
+
+    if (process.env.RESEND_API_KEY) {
+      await resend.emails.send({
+        from: 'DILYA Boutique <onboarding@resend.dev>',
+        to: email,
+        subject: 'Bienvenue dans l\'univers DILYA ! 🎉',
+        html: `
+          <div style="font-family: sans-serif; max-width: 600px; margin: 0 auto; color: #333;">
+            <h1 style="color: #e2959c;">Bienvenue chez DILYA !</h1>
+            <p>Merci de vous être inscrit(e) à notre newsletter.</p>
+            <p>Vous serez désormais la première informée de nos nouvelles collections, de nos offres exclusives et de nos ventes privées.</p>
+            <br/>
+            <p>Pour vous remercier, utilisez le code <strong>BIENVENUE10</strong> lors de votre prochaine commande pour bénéficier de 10% de réduction !</p>
+            <br/>
+            <p>Avec amour,</p>
+            <p><strong>L'équipe DILYA</strong></p>
+          </div>
+        `,
+      })
+    }
+
+    return { success: true }
+  } catch (err) {
+    console.error('Error subscribing to newsletter:', err)
+    return { error: 'Une erreur est survenue lors de l\'inscription.' }
+  }
+}

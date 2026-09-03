@@ -1,9 +1,12 @@
 'use client'
 
+import { useState } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
+import { toast } from 'sonner'
+import { subscribeToNewsletter } from '@/app/actions'
 
 const InstagramIcon = ({ className }: { className?: string }) => (
   <svg viewBox="0 0 24 24" fill="currentColor" className={className} xmlns="http://www.w3.org/2000/svg">
@@ -70,13 +73,50 @@ export function SiteFooter() {
             </div>
             <div className="flex flex-col items-center sm:items-start">
               <h3 className="font-sans text-[13px] font-bold uppercase tracking-wider text-white relative inline-block">
-                Nous suivre
-                <span className="absolute -bottom-10 -right-16 text-3xl font-script text-white/40 rotate-[-15deg]">Merci ♡</span>
-              </h3>
-              <div className="mt-5 flex gap-3 text-white">
-                <a href="https://www.instagram.com/im_laicha/" target="_blank" rel="noopener noreferrer" className="flex h-10 w-10 items-center justify-center rounded-full border border-white/30 hover:bg-white hover:text-[#e2959c] transition-colors"><InstagramIcon className="h-4 w-4" /></a>
-                <a href="https://www.tiktok.com/@laicha.xo" target="_blank" rel="noopener noreferrer" className="flex h-10 w-10 items-center justify-center rounded-full border border-white/30 hover:bg-white hover:text-[#e2959c] transition-colors"><TikTokIcon className="h-4 w-4" /></a>
-                <a href="https://www.snapchat.com/@laichastar" target="_blank" rel="noopener noreferrer" className="flex h-10 w-10 items-center justify-center rounded-full border border-white/30 hover:bg-white hover:text-[#e2959c] transition-colors"><SnapchatIcon className="h-[18px] w-[18px]" /></a>
+            <p className="text-[13px] leading-relaxed text-white/70 max-w-sm">
+              L'élégance minimaliste pour la femme moderne. Des pièces intemporelles conçues avec passion.
+            </p>
+            <div className="flex gap-4">
+              <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="flex h-10 w-10 items-center justify-center rounded-full bg-white/5 border border-white/10 text-white transition-all hover:bg-white hover:text-black hover:scale-110">
+                <Instagram className="h-4 w-4" />
+                <span className="sr-only">Instagram</span>
+              </a>
+              <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="flex h-10 w-10 items-center justify-center rounded-full bg-white/5 border border-white/10 text-white transition-all hover:bg-white hover:text-black hover:scale-110">
+                <Facebook className="h-4 w-4" />
+                <span className="sr-only">Facebook</span>
+              </a>
+            </div>
+          </div>
+
+          {/* Links Grid */}
+          <div className="grid grid-cols-2 gap-8 lg:col-span-4 sm:grid-cols-3">
+            <div className="flex flex-col gap-4">
+              <h3 className="font-serif text-sm font-semibold text-white tracking-wider uppercase">Boutique</h3>
+              <div className="flex flex-col gap-2.5 text-[11px] text-white/60">
+                <Link href="/categorie/everyday" className="w-fit hover:text-white transition-colors relative after:absolute after:bottom-0 after:left-0 after:h-[1px] after:w-0 after:bg-white after:transition-all hover:after:w-full">Everyday</Link>
+                <Link href="/categorie/night" className="w-fit hover:text-white transition-colors relative after:absolute after:bottom-0 after:left-0 after:h-[1px] after:w-0 after:bg-white after:transition-all hover:after:w-full">Night</Link>
+                <Link href="/categorie/accessories" className="w-fit hover:text-white transition-colors relative after:absolute after:bottom-0 after:left-0 after:h-[1px] after:w-0 after:bg-white after:transition-all hover:after:w-full">Accessories</Link>
+                <Link href="/nouveautes" className="w-fit hover:text-white transition-colors relative after:absolute after:bottom-0 after:left-0 after:h-[1px] after:w-0 after:bg-white after:transition-all hover:after:w-full">Nouveautés</Link>
+              </div>
+            </div>
+            
+            <div className="flex flex-col gap-4">
+              <h3 className="font-serif text-sm font-semibold text-white tracking-wider uppercase">À propos</h3>
+              <div className="flex flex-col gap-2.5 text-[11px] text-white/60">
+                <Link href="/notre-histoire" className="w-fit hover:text-white transition-colors relative after:absolute after:bottom-0 after:left-0 after:h-[1px] after:w-0 after:bg-white after:transition-all hover:after:w-full">Notre histoire</Link>
+                <Link href="/valeurs" className="w-fit hover:text-white transition-colors relative after:absolute after:bottom-0 after:left-0 after:h-[1px] after:w-0 after:bg-white after:transition-all hover:after:w-full">Nos valeurs</Link>
+                <Link href="/journal" className="w-fit hover:text-white transition-colors relative after:absolute after:bottom-0 after:left-0 after:h-[1px] after:w-0 after:bg-white after:transition-all hover:after:w-full">Journal</Link>
+              </div>
+            </div>
+
+            <div className="flex flex-col gap-4">
+              <h3 className="font-serif text-sm font-semibold text-white tracking-wider uppercase">Aide</h3>
+              <div className="flex flex-col gap-2.5 text-[11px] text-white/60">
+                <Link href="/faq" className="w-fit hover:text-white transition-colors relative after:absolute after:bottom-0 after:left-0 after:h-[1px] after:w-0 after:bg-white after:transition-all hover:after:w-full">FAQ</Link>
+                <Link href="/livraison" className="w-fit hover:text-white transition-colors relative after:absolute after:bottom-0 after:left-0 after:h-[1px] after:w-0 after:bg-white after:transition-all hover:after:w-full">Livraison</Link>
+                <Link href="/retours" className="w-fit hover:text-white transition-colors relative after:absolute after:bottom-0 after:left-0 after:h-[1px] after:w-0 after:bg-white after:transition-all hover:after:w-full">Retours</Link>
+                <Link href="/guide-des-tailles" className="w-fit hover:text-white transition-colors relative after:absolute after:bottom-0 after:left-0 after:h-[1px] after:w-0 after:bg-white after:transition-all hover:after:w-full">Guide des tailles</Link>
+                <Link href="/contact" className="w-fit hover:text-white transition-colors relative after:absolute after:bottom-0 after:left-0 after:h-[1px] after:w-0 after:bg-white after:transition-all hover:after:w-full">Contact</Link>
               </div>
             </div>
           </div>
@@ -87,15 +127,23 @@ export function SiteFooter() {
             <p className="text-[11px] leading-relaxed text-white/80 max-w-xs mx-auto lg:mx-0">
               Sois la première informée des nouveautés et offres exclusives.
             </p>
-            <form className="mt-6 flex flex-col sm:flex-row gap-3" onSubmit={(e) => e.preventDefault()}>
+            <form className="mt-6 flex flex-col sm:flex-row gap-3" onSubmit={handleSubscribe}>
               <Input
                 type="email"
                 required
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
                 placeholder="Ton e-mail"
                 className="h-12 rounded-xl border-white/20 bg-white/10 text-white placeholder:text-white/60 focus-visible:ring-white/40 text-[11px] px-5"
+                disabled={isLoading}
               />
-              <Button type="submit" variant="secondary" className="h-12 rounded-xl px-8 font-semibold text-[11px] uppercase tracking-wider bg-[#d47885] text-white hover:bg-[#c26774] border-none shadow-sm transition-colors">
-                S'inscrire
+              <Button 
+                type="submit" 
+                variant="secondary" 
+                disabled={isLoading}
+                className="h-12 rounded-xl px-8 font-semibold text-[11px] uppercase tracking-wider bg-[#d47885] text-white hover:bg-[#c26774] border-none shadow-sm transition-colors"
+              >
+                {isLoading ? "En cours..." : "S'inscrire"}
               </Button>
             </form>
           </div>

@@ -234,3 +234,15 @@ model Article {
 
   @@map("articles")
 }
+
+// ---------------------------------------------------------------------------
+// Newsletter Subscribers
+// ---------------------------------------------------------------------------
+
+model Subscriber {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  createdAt DateTime @default(now())
+
+  @@map("subscribers")
+}
