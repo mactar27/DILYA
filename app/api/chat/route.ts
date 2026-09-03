@@ -1,5 +1,5 @@
 import { google } from '@ai-sdk/google'
-import { streamText } from 'ai'
+import { streamText, convertToModelMessages } from 'ai'
 import { prisma } from '@/lib/db'
 
 // Force Next.js to not cache this route so the product fetch is always fresh
@@ -50,7 +50,7 @@ Instructions:
     const result = streamText({
       model: google('gemini-2.5-flash'),
       system: systemPrompt,
-      messages,
+      messages: convertToModelMessages(messages),
     })
 
     return result.toUIMessageStreamResponse()
