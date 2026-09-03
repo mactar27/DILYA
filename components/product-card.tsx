@@ -2,7 +2,7 @@
 
 import Image from 'next/image'
 import Link from 'next/link'
-import { ShoppingBag, Heart } from 'lucide-react'
+import { ShoppingBag } from 'lucide-react'
 import { toast } from 'sonner'
 import { cn } from '@/lib/utils'
 import { formatPrice } from '@/lib/format'
@@ -62,18 +62,6 @@ export function ProductCard({ product }: { product: Product }) {
             </span>
           </div>
         )}
-
-        {/* Heart Icon (Top Right) */}
-        <button
-          aria-label="Ajouter aux favoris"
-          className="absolute right-3 top-3 flex h-8 w-8 items-center justify-center rounded-full bg-white text-primary shadow-sm transition-transform hover:scale-110"
-          onClick={(e) => {
-            e.preventDefault()
-            toast.success('Ajouté aux coups de cœur')
-          }}
-        >
-          <Heart className="h-4 w-4" />
-        </button>
       </div>
 
       <div className="mt-4 flex flex-col gap-2 flex-1 px-1">
