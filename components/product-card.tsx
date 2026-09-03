@@ -2,6 +2,7 @@
 
 import Image from 'next/image'
 import Link from 'next/link'
+import { useRouter } from 'next/navigation'
 import { ShoppingBag } from 'lucide-react'
 import { toast } from 'sonner'
 import { cn } from '@/lib/utils'
@@ -11,10 +12,23 @@ import type { Product } from '@/lib/products'
 
 export function ProductCard({ product }: { product: Product }) {
   const { addItem } = useCart()
-
+  const router = useRouter()
+  
   function handleAdd(e: React.MouseEvent) {
     e.preventDefault()
     if (!product.inStock) return
+
+    // S'il y a des tailles, couleurs ou variantes, on redirige vers la page produit pour choisir
+    const hasVariants = (product.sizes && product.sizes.length > 0) || 
+                        (product.colors && product.colors.length > 0) || 
+                        (product.variants && product.variants.options.length > 0)
+    
+    if (hasVariants) {
+      router.push(`/produit/${product.slug}`)
+      toast('Veuillez choisir votre taille sur la page produit', { icon: '👗' })
+      return
+    }
+
     addItem({
       id: product.id,
       slug: product.slug,

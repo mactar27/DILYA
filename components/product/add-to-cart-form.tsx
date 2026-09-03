@@ -4,6 +4,7 @@ import { useState } from 'react'
 import { Minus, Plus, ShoppingBag } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Select } from '@/components/ui/select'
+import { cn } from '@/lib/utils'
 import { useCart } from '@/lib/cart-context'
 import type { Product } from '@/lib/products'
 
@@ -14,9 +15,8 @@ interface AddToCartFormProps {
 export function AddToCartForm({ product }: AddToCartFormProps) {
   const { addItem } = useCart()
   const [quantity, setQuantity] = useState(1)
-  const [variant, setVariant] = useState<string | undefined>(
-    product.variants?.options[0]
-  )
+  const initialVariant = product.variants?.options[0] || (product.sizes?.[0] ? `Taille: ${product.sizes[0]}` : undefined) || (product.colors?.[0] ? `Couleur: ${product.colors[0]}` : undefined)
+  const [variant, setVariant] = useState<string | undefined>(initialVariant)
 
   const handleAdd = () => {
     addItem(
@@ -34,15 +34,12 @@ export function AddToCartForm({ product }: AddToCartFormProps) {
 
   return (
     <div className="mt-8 flex flex-col gap-6">
+      {/* Affichage des Variants classiques (si existants) */}
       {product.variants && (
         <div className="flex flex-col gap-2">
-          <label htmlFor="variant-select" className="text-sm font-medium">
+          <label className="text-sm font-medium">
             {product.variants.label}
           </label>
-          {/* Note: In a real app we might use a dedicated select/radio component for variants. 
-              We're using a simple select here for brevity, assuming standard select is fine or 
-              we can update later to a custom UI.
-          */}
           <div className="flex flex-wrap gap-2">
             {product.variants.options.map((opt) => (
               <Button
@@ -55,6 +52,55 @@ export function AddToCartForm({ product }: AddToCartFormProps) {
                 {opt}
               </Button>
             ))}
+          </div>
+        </div>
+      )}
+
+      {/* Affichage des Tailles (si variants n'est pas utilisé) */}
+      {!product.variants && product.sizes && product.sizes.length > 0 && (
+        <div className="flex flex-col gap-2">
+          <label className="text-sm font-medium">Taille</label>
+          <div className="flex flex-wrap gap-2">
+            {product.sizes.map((size) => {
+              const sizeLabel = `Taille: ${size}`;
+              return (
+                <Button
+                  key={size}
+                  type="button"
+                  variant={variant === sizeLabel ? 'default' : 'outline'}
+                  onClick={() => setVariant(sizeLabel)}
+                  className="h-10 min-w-10 px-3"
+                >
+                  {size}
+                </Button>
+              )
+            })}
+          </div>
+        </div>
+      )}
+
+      {/* Affichage des Couleurs */}
+      {!product.variants && product.colors && product.colors.length > 0 && (
+        <div className="flex flex-col gap-2">
+          <label className="text-sm font-medium">Couleur</label>
+          <div className="flex flex-wrap gap-2">
+            {product.colors.map((color) => {
+              const colorLabel = `Couleur: ${color}`;
+              return (
+                <button
+                  key={color}
+                  type="button"
+                  onClick={() => setVariant(variant ? `${variant.split(' | ')[0]} | ${colorLabel}` : colorLabel)}
+                  className={cn(
+                    "h-8 w-8 rounded-full border shadow-sm transition-transform hover:scale-110 ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
+                    variant?.includes(colorLabel) ? "ring-2 ring-primary ring-offset-2" : "border-black/10"
+                  )}
+                  style={{ backgroundColor: color }}
+                  title={color}
+                  aria-label={`Choisir la couleur ${color}`}
+                />
+              )
+            })}
           </div>
         </div>
       )}

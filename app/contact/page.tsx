@@ -1,7 +1,5 @@
 import { Metadata } from 'next'
-import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
-import { Label } from '@/components/ui/label'
+import { ContactForm } from '@/components/contact-form'
 
 export const metadata: Metadata = {
   title: 'Contact | DILYA',
@@ -18,34 +16,7 @@ export default function ContactPage() {
         </p>
       </div>
 
-      <form className="space-y-6">
-        <div className="grid gap-6 sm:grid-cols-2">
-          <div className="space-y-2">
-            <Label htmlFor="name">Nom complet</Label>
-            <Input id="name" placeholder="Votre nom" />
-          </div>
-          <div className="space-y-2">
-            <Label htmlFor="email">Email</Label>
-            <Input id="email" type="email" placeholder="votre@email.com" />
-          </div>
-        </div>
-        <div className="space-y-2">
-          <Label htmlFor="subject">Sujet</Label>
-          <Input id="subject" placeholder="Sujet de votre message" />
-        </div>
-        <div className="space-y-2">
-          <Label htmlFor="message">Message</Label>
-          <textarea 
-            id="message" 
-            rows={6}
-            className="flex w-full rounded-md border border-input bg-transparent px-3 py-2 text-sm shadow-sm placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50" 
-            placeholder="Comment pouvons-nous vous aider ?" 
-          />
-        </div>
-        <Button size="lg" className="w-full sm:w-auto px-8">
-          Envoyer le message
-        </Button>
-      </form>
+      <ContactForm />
     </div>
   )
 }
