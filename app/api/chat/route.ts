@@ -50,7 +50,7 @@ Instructions:
     const result = streamText({
       model: google('gemini-2.5-flash'),
       system: systemPrompt,
-      messages: convertToModelMessages(messages),
+      messages: await convertToModelMessages(messages),
     })
 
     return result.toUIMessageStreamResponse()
