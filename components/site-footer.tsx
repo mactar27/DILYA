@@ -27,16 +27,22 @@ const SnapchatIcon = ({ className }: { className?: string }) => (
 )
 
 export function SiteFooter() {
+  const pathname = usePathname()
   const [email, setEmail] = useState('')
   const [isLoading, setIsLoading] = useState(false)
 
   const handleSubscribe = async (e: React.FormEvent) => {
     e.preventDefault()
+    if (!email) return
     setIsLoading(true)
     try {
-      await subscribeToNewsletter(email)
-      toast.success('Inscrit avec succès !')
-      setEmail('')
+      const result = await subscribeToNewsletter(email)
+      if (result.error) {
+        toast.error(result.error)
+      } else {
+        toast.success('Merci ! Vous êtes bien inscrit(e). 🎉')
+        setEmail('')
+      }
     } catch (error) {
       toast.error("Erreur lors de l'inscription")
     } finally {
@@ -44,77 +50,64 @@ export function SiteFooter() {
     }
   }
 
-  const pathname = usePathname()
   if (pathname?.startsWith('/admin')) return null
 
   return (
-    <footer className="mt-16 bg-[#1a1a1a] text-white overflow-hidden relative rounded-t-[32px] md:rounded-t-[48px]">
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute -top-[20%] -right-[10%] w-[50%] h-[50%] rounded-full bg-primary/5 blur-[120px] mix-blend-screen" />
-        <div className="absolute -bottom-[20%] -left-[10%] w-[50%] h-[50%] rounded-full bg-primary/5 blur-[120px] mix-blend-screen" />
-      </div>
-
-      <div className="mx-auto max-w-7xl px-6 py-16 lg:px-8 relative">
+    <footer className="mt-16 bg-[#e2959c] text-white overflow-hidden relative rounded-t-[32px] md:rounded-t-[48px]">
+      <div className="mx-auto max-w-7xl px-6 py-16 lg:px-8">
         <div className="grid gap-12 lg:grid-cols-12 lg:gap-8">
-          {/* Main Info Column */}
-          <div className="flex flex-col gap-8 lg:col-span-4 text-center lg:text-left items-center lg:items-start">
-            <Link href="/" className="inline-block transition-transform hover:scale-105 active:scale-95 w-fit">
-              <span className="font-serif text-3xl font-bold tracking-tight text-white drop-shadow-sm">Dilya🌸</span>
+          {/* Logo Column */}
+          <div className="lg:col-span-2 flex flex-col items-center lg:items-start text-center lg:text-left mb-6 lg:mb-0">
+            <Link href="/" className="flex items-center gap-1 relative inline-block">
+              <span className="font-script text-[4.5rem] text-white font-normal leading-none drop-shadow-sm">Dilya</span>
+              <span className="text-3xl relative top-2 opacity-90 drop-shadow-sm">🌸</span>
             </Link>
-            <p className="text-[13px] leading-relaxed text-white/70 max-w-sm">
-              L'élégance minimaliste pour la femme moderne. Des pièces intemporelles conçues avec passion.
-            </p>
-            <div className="flex gap-4">
-              <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="flex h-10 w-10 items-center justify-center rounded-full bg-white/5 border border-white/10 text-white transition-all hover:bg-white hover:text-[#e2959c] hover:scale-110">
-                <InstagramIcon className="h-4 w-4" />
-                <span className="sr-only">Instagram</span>
-              </a>
-              <a href="https://tiktok.com" target="_blank" rel="noopener noreferrer" className="flex h-10 w-10 items-center justify-center rounded-full bg-white/5 border border-white/10 text-white transition-all hover:bg-white hover:text-[#e2959c] hover:scale-110">
-                <TikTokIcon className="h-4 w-4" />
-                <span className="sr-only">TikTok</span>
-              </a>
-              <a href="https://snapchat.com" target="_blank" rel="noopener noreferrer" className="flex h-10 w-10 items-center justify-center rounded-full bg-white/5 border border-white/10 text-white transition-all hover:bg-white hover:text-[#e2959c] hover:scale-110">
-                <SnapchatIcon className="h-4 w-4" />
-                <span className="sr-only">Snapchat</span>
-              </a>
-            </div>
           </div>
 
-          {/* Links Grid */}
-          <div className="grid grid-cols-2 gap-8 lg:col-span-4 sm:grid-cols-3">
-            <div className="flex flex-col gap-4">
-              <h3 className="font-serif text-sm font-semibold text-white tracking-wider uppercase">Boutique</h3>
-              <div className="flex flex-col gap-2.5 text-[11px] text-white/60">
-                <Link href="/categorie/everyday" className="w-fit hover:text-white transition-colors relative after:absolute after:bottom-0 after:left-0 after:h-[1px] after:w-0 after:bg-white after:transition-all hover:after:w-full">Everyday</Link>
-                <Link href="/categorie/night" className="w-fit hover:text-white transition-colors relative after:absolute after:bottom-0 after:left-0 after:h-[1px] after:w-0 after:bg-white after:transition-all hover:after:w-full">Night</Link>
-                <Link href="/categorie/accessories" className="w-fit hover:text-white transition-colors relative after:absolute after:bottom-0 after:left-0 after:h-[1px] after:w-0 after:bg-white after:transition-all hover:after:w-full">Accessories</Link>
-                <Link href="/nouveautes" className="w-fit hover:text-white transition-colors relative after:absolute after:bottom-0 after:left-0 after:h-[1px] after:w-0 after:bg-white after:transition-all hover:after:w-full">Nouveautés</Link>
-              </div>
+          {/* Links Columns */}
+          <div className="grid grid-cols-2 gap-8 sm:grid-cols-4 lg:col-span-6">
+            <div>
+              <h3 className="font-sans text-sm font-semibold text-white">Boutique</h3>
+              <ul className="mt-4 flex flex-col gap-3 text-xs text-primary-foreground/70">
+                <li><Link href="/categorie/everyday" className="hover:text-white">Everyday</Link></li>
+                <li><Link href="/categorie/night" className="hover:text-white">Night</Link></li>
+                <li><Link href="/categorie/accessories" className="hover:text-white">Accessories</Link></li>
+                <li><Link href="/categorie/nouveautes" className="hover:text-white">Nouveautés</Link></li>
+              </ul>
             </div>
-            
-            <div className="flex flex-col gap-4">
-              <h3 className="font-serif text-sm font-semibold text-white tracking-wider uppercase">À propos</h3>
-              <div className="flex flex-col gap-2.5 text-[11px] text-white/60">
-                <Link href="/notre-histoire" className="w-fit hover:text-white transition-colors relative after:absolute after:bottom-0 after:left-0 after:h-[1px] after:w-0 after:bg-white after:transition-all hover:after:w-full">Notre histoire</Link>
-                <Link href="/valeurs" className="w-fit hover:text-white transition-colors relative after:absolute after:bottom-0 after:left-0 after:h-[1px] after:w-0 after:bg-white after:transition-all hover:after:w-full">Nos valeurs</Link>
-                <Link href="/journal" className="w-fit hover:text-white transition-colors relative after:absolute after:bottom-0 after:left-0 after:h-[1px] after:w-0 after:bg-white after:transition-all hover:after:w-full">Journal</Link>
-              </div>
+            <div>
+              <h3 className="font-sans text-sm font-semibold text-white">À propos</h3>
+              <ul className="mt-4 flex flex-col gap-3 text-xs text-primary-foreground/70">
+                <li><Link href="/notre-histoire" className="hover:text-white">Notre histoire</Link></li>
+                <li><Link href="/valeurs" className="hover:text-white">Nos valeurs</Link></li>
+                <li><Link href="/journal" className="hover:text-white">Journal</Link></li>
+                <li><Link href="/faq" className="hover:text-white">FAQ</Link></li>
+              </ul>
             </div>
-
-            <div className="flex flex-col gap-4">
-              <h3 className="font-serif text-sm font-semibold text-white tracking-wider uppercase">Aide</h3>
-              <div className="flex flex-col gap-2.5 text-[11px] text-white/60">
-                <Link href="/faq" className="w-fit hover:text-white transition-colors relative after:absolute after:bottom-0 after:left-0 after:h-[1px] after:w-0 after:bg-white after:transition-all hover:after:w-full">FAQ</Link>
-                <Link href="/livraison" className="w-fit hover:text-white transition-colors relative after:absolute after:bottom-0 after:left-0 after:h-[1px] after:w-0 after:bg-white after:transition-all hover:after:w-full">Livraison</Link>
-                <Link href="/retours" className="w-fit hover:text-white transition-colors relative after:absolute after:bottom-0 after:left-0 after:h-[1px] after:w-0 after:bg-white after:transition-all hover:after:w-full">Retours</Link>
-                <Link href="/guide-des-tailles" className="w-fit hover:text-white transition-colors relative after:absolute after:bottom-0 after:left-0 after:h-[1px] after:w-0 after:bg-white after:transition-all hover:after:w-full">Guide des tailles</Link>
-                <Link href="/contact" className="w-fit hover:text-white transition-colors relative after:absolute after:bottom-0 after:left-0 after:h-[1px] after:w-0 after:bg-white after:transition-all hover:after:w-full">Contact</Link>
+            <div>
+              <h3 className="font-sans text-sm font-semibold text-white">Aide</h3>
+              <ul className="mt-4 flex flex-col gap-3 text-xs text-primary-foreground/70">
+                <li><Link href="/livraison" className="hover:text-white">Livraison</Link></li>
+                <li><Link href="/retours" className="hover:text-white">Retours</Link></li>
+                <li><Link href="/guide-des-tailles" className="hover:text-white">Guide des tailles</Link></li>
+                <li><Link href="/contact" className="hover:text-white">Contact</Link></li>
+              </ul>
+            </div>
+            <div className="flex flex-col items-center sm:items-start">
+              <h3 className="font-sans text-[13px] font-bold uppercase tracking-wider text-white relative inline-block">
+                Nous suivre
+                <span className="absolute -bottom-10 -right-16 text-3xl font-script text-white/40 rotate-[-15deg]">Merci ♡</span>
+              </h3>
+              <div className="mt-5 flex gap-3 text-white">
+                <a href="https://www.instagram.com/im_laicha/" target="_blank" rel="noopener noreferrer" className="flex h-10 w-10 items-center justify-center rounded-full border border-white/30 hover:bg-white hover:text-[#e2959c] transition-colors"><InstagramIcon className="h-4 w-4" /></a>
+                <a href="https://www.tiktok.com/@laicha.xo" target="_blank" rel="noopener noreferrer" className="flex h-10 w-10 items-center justify-center rounded-full border border-white/30 hover:bg-white hover:text-[#e2959c] transition-colors"><TikTokIcon className="h-4 w-4" /></a>
+                <a href="https://www.snapchat.com/@laichastar" target="_blank" rel="noopener noreferrer" className="flex h-10 w-10 items-center justify-center rounded-full border border-white/30 hover:bg-white hover:text-[#e2959c] transition-colors"><SnapchatIcon className="h-[18px] w-[18px]" /></a>
               </div>
             </div>
           </div>
 
           {/* Newsletter Column */}
-          <div className="lg:col-span-4 bg-white/5 rounded-3xl p-8 border border-white/10 text-center lg:text-left shadow-sm">
+          <div className="lg:col-span-4 bg-white/5 rounded-3xl p-8 lg:ml-auto border border-white/10 text-center lg:text-left shadow-sm">
             <h3 className="font-serif text-[22px] font-medium text-white mb-3">Rejoins l'univers DILYA</h3>
             <p className="text-[11px] leading-relaxed text-white/80 max-w-xs mx-auto lg:mx-0">
               Sois la première informée des nouveautés et offres exclusives.
@@ -129,12 +122,7 @@ export function SiteFooter() {
                 className="h-12 rounded-xl border-white/20 bg-white/10 text-white placeholder:text-white/60 focus-visible:ring-white/40 text-[11px] px-5"
                 disabled={isLoading}
               />
-              <Button 
-                type="submit" 
-                variant="secondary" 
-                disabled={isLoading}
-                className="h-12 rounded-xl px-8 font-semibold text-[11px] uppercase tracking-wider bg-[#d47885] text-white hover:bg-[#c26774] border-none shadow-sm transition-colors"
-              >
+              <Button type="submit" variant="secondary" disabled={isLoading} className="h-12 rounded-xl px-8 font-semibold text-[11px] uppercase tracking-wider bg-[#d47885] text-white hover:bg-[#c26774] border-none shadow-sm transition-colors">
                 {isLoading ? "En cours..." : "S'inscrire"}
               </Button>
             </form>
