@@ -1,8 +1,7 @@
 'use client'
-
+import { useState } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
-import { useRouter } from 'next/navigation'
 import { ShoppingBag } from 'lucide-react'
 import { toast } from 'sonner'
 import { cn } from '@/lib/utils'
@@ -12,20 +11,16 @@ import type { Product } from '@/lib/products'
 
 export function ProductCard({ product }: { product: Product }) {
   const { addItem } = useCart()
-  const router = useRouter()
-  
+
+  const [selectedSize, setSelectedSize] = useState<string | null>(null)
+
   function handleAdd(e: React.MouseEvent) {
     e.preventDefault()
+    e.stopPropagation()
     if (!product.inStock) return
-
-    // S'il y a des tailles, couleurs ou variantes, on redirige vers la page produit pour choisir
-    const hasVariants = (product.sizes && product.sizes.length > 0) || 
-                        (product.colors && product.colors.length > 0) || 
-                        (product.variants && product.variants.options.length > 0)
     
-    if (hasVariants) {
-      router.push(`/produit/${product.slug}`)
-      toast('Veuillez choisir votre taille sur la page produit', { icon: '👗' })
+    if (product.sizes && product.sizes.length > 0 && !selectedSize) {
+      toast.error('Veuillez sélectionner une taille')
       return
     }
 
@@ -35,6 +30,7 @@ export function ProductCard({ product }: { product: Product }) {
       name: product.name,
       price: product.price,
       image: product.images[0],
+      variant: selectedSize || undefined
     })
     toast.success(`${product.name} ajouté au panier`)
   }
@@ -98,11 +94,24 @@ export function ProductCard({ product }: { product: Product }) {
         )}
 
         {product.sizes && product.sizes.length > 0 && (
-          <div className="flex gap-1 mb-3 flex-wrap">
+          <div className="flex gap-1 mb-3 flex-wrap relative z-10">
             {product.sizes.map((size, idx) => (
-              <span key={idx} className="px-1.5 py-0.5 text-[9px] font-bold text-foreground/70 bg-white rounded-[4px] border border-black/5">
+              <button 
+                key={idx}
+                onClick={(e) => {
+                  e.preventDefault()
+                  e.stopPropagation()
+                  setSelectedSize(size)
+                }}
+                className={cn(
+                  "px-1.5 py-0.5 text-[9px] font-bold rounded-[4px] border transition-colors",
+                  selectedSize === size 
+                    ? "bg-primary text-primary-foreground border-primary" 
+                    : "bg-white text-foreground/70 border-black/5 hover:border-primary/50"
+                )}
+              >
                 {size}
-              </span>
+              </button>
             ))}
           </div>
         )}
@@ -110,7 +119,7 @@ export function ProductCard({ product }: { product: Product }) {
         <button
           onClick={handleAdd}
           disabled={!product.inStock}
-          className="mt-auto flex w-full items-center justify-center rounded-xl bg-[#e2959c] py-3 text-white transition-transform hover:scale-[1.02] active:scale-[0.98] disabled:opacity-50 disabled:hover:scale-100"
+          className="relative z-10 mt-auto flex w-full items-center justify-center rounded-xl bg-[#e2959c] py-3 text-white transition-transform hover:scale-[1.02] active:scale-[0.98] disabled:opacity-50 disabled:hover:scale-100"
         >
           <ShoppingBag className="h-[18px] w-[18px]" strokeWidth={2.5} />
         </button>
