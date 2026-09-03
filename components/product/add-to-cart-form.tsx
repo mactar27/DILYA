@@ -17,8 +17,18 @@ export function AddToCartForm({ product }: AddToCartFormProps) {
   const [variant, setVariant] = useState<string | undefined>(
     product.variants?.options[0] || (product.sizes && product.sizes.length > 0 ? product.sizes[0] : undefined)
   )
+  const [selectedColor, setSelectedColor] = useState<string | undefined>(
+    product.colors && product.colors.length > 0 ? product.colors[0] : undefined
+  )
 
   const handleAdd = () => {
+    let combinedVariant = variant
+    if (variant && selectedColor) {
+      combinedVariant = `${variant} - ${selectedColor}`
+    } else if (selectedColor) {
+      combinedVariant = selectedColor
+    }
+
     addItem(
       {
         id: product.id,
@@ -26,7 +36,7 @@ export function AddToCartForm({ product }: AddToCartFormProps) {
         name: product.name,
         price: product.price,
         image: product.images[0] || '/placeholder.svg',
-        variant,
+        variant: combinedVariant,
       },
       quantity
     )
@@ -73,6 +83,30 @@ export function AddToCartForm({ product }: AddToCartFormProps) {
           </div>
         </div>
       ) : null}
+
+      {product.colors && product.colors.length > 0 && (
+        <div className="flex flex-col gap-2">
+          <label className="text-sm font-medium">
+            Couleur
+          </label>
+          <div className="flex flex-wrap gap-3">
+            {product.colors.map((color) => (
+              <button
+                key={color}
+                type="button"
+                onClick={() => setSelectedColor(color)}
+                className={`w-8 h-8 rounded-full border-2 transition-all ${
+                  selectedColor === color
+                    ? 'border-primary ring-2 ring-primary ring-offset-2'
+                    : 'border-transparent ring-1 ring-border hover:ring-border/80'
+                }`}
+                style={{ backgroundColor: color }}
+                aria-label={`Sélectionner la couleur ${color}`}
+              />
+            ))}
+          </div>
+        </div>
+      )}
 
       <div className="flex flex-col gap-4 sm:flex-row sm:items-center">
         <div className="flex flex-col gap-2">

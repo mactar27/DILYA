@@ -13,6 +13,7 @@ export function ProductCard({ product }: { product: Product }) {
   const { addItem } = useCart()
 
   const [selectedSize, setSelectedSize] = useState<string | null>(null)
+  const [selectedColor, setSelectedColor] = useState<string | null>(null)
 
   function handleAdd(e: React.MouseEvent) {
     e.preventDefault()
@@ -24,13 +25,27 @@ export function ProductCard({ product }: { product: Product }) {
       return
     }
 
+    if (product.colors && product.colors.length > 0 && !selectedColor) {
+      toast.error('Veuillez sélectionner une couleur')
+      return
+    }
+
+    let combinedVariant = undefined
+    if (selectedSize && selectedColor) {
+      combinedVariant = `${selectedSize} - ${selectedColor}`
+    } else if (selectedSize) {
+      combinedVariant = selectedSize
+    } else if (selectedColor) {
+      combinedVariant = selectedColor
+    }
+
     addItem({
       id: product.id,
       slug: product.slug,
       name: product.name,
       price: product.price,
       image: product.images[0],
-      variant: selectedSize || undefined
+      variant: combinedVariant
     })
     toast.success(`${product.name} ajouté au panier`)
   }
@@ -86,9 +101,22 @@ export function ProductCard({ product }: { product: Product }) {
         </div>
         
         {product.colors && product.colors.length > 0 && (
-          <div className="flex gap-1 mb-2">
+          <div className="flex gap-1 mb-2 relative z-10">
             {product.colors.map((color, idx) => (
-              <span key={idx} className="w-3.5 h-3.5 rounded-full border border-black/10 shadow-sm" style={{ backgroundColor: color }}></span>
+              <button 
+                key={idx} 
+                onClick={(e) => {
+                  e.preventDefault()
+                  e.stopPropagation()
+                  setSelectedColor(color)
+                }}
+                className={cn(
+                  "w-4 h-4 rounded-full border shadow-sm transition-transform hover:scale-110",
+                  selectedColor === color ? "ring-2 ring-primary ring-offset-1 border-transparent" : "border-black/10"
+                )} 
+                style={{ backgroundColor: color }}
+                aria-label={`Couleur ${color}`}
+              />
             ))}
           </div>
         )}
