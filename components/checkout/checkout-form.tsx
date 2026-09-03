@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import Image from 'next/image'
 import { useRouter } from 'next/navigation'
 import { Check, ChevronRight, Loader2, ChevronsUpDown } from 'lucide-react'
 import { toast } from 'sonner'
@@ -180,6 +181,7 @@ export function CheckoutForm() {
                         onChange={(e) => setPaymentMethod(e.target.value)}
                         className="w-4 h-4 text-[#1dc3f5]"
                       />
+                      <Image src="/wave.jpg" alt="Wave" width={24} height={24} className="rounded-[4px] object-cover" />
                       <span className="font-medium">Wave</span>
                     </label>
                     <label className="flex items-center gap-3 rounded-lg border p-3 cursor-pointer hover:bg-muted/50 transition-colors">
@@ -191,6 +193,7 @@ export function CheckoutForm() {
                         onChange={(e) => setPaymentMethod(e.target.value)}
                         className="w-4 h-4 text-[#f16e00]"
                       />
+                      <Image src="/orange-money.png" alt="Orange Money" width={24} height={24} className="rounded-[4px] object-cover" />
                       <span className="font-medium">Orange Money</span>
                     </label>
                   </div>
