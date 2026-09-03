@@ -11,8 +11,10 @@ export function ChatWidget() {
   const pathname = usePathname()
   const [isOpen, setIsOpen] = useState(false)
   const [localInput, setLocalInput] = useState('')
-  const { messages, isLoading, error, append } = useChat()
+  const { messages, status, error, sendMessage } = useChat()
   const messagesEndRef = useRef<HTMLDivElement>(null)
+  
+  const isLoading = status === 'streaming' || status === 'submitted'
 
   // Ne pas afficher sur le dashboard admin
   if (pathname?.startsWith('/admin')) {
@@ -142,7 +144,7 @@ export function ChatWidget() {
                   e.preventDefault();
                   const text = localInput.trim();
                   if (!text || isLoading) return;
-                  append({ role: 'user', content: text });
+                  sendMessage({ role: 'user', content: text });
                   setLocalInput('');
                 }
               }}
@@ -156,7 +158,7 @@ export function ChatWidget() {
                 e.preventDefault();
                 const text = localInput.trim();
                 if (!text || isLoading) return;
-                append({ role: 'user', content: text });
+                sendMessage({ role: 'user', content: text });
                 setLocalInput('');
               }}
               size="icon"
