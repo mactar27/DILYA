@@ -104,7 +104,7 @@ export function ProductCard({ product }: { product: Product }) {
                   setSelectedSize(size)
                 }}
                 className={cn(
-                  "px-1.5 py-0.5 text-[9px] font-bold rounded-[4px] border transition-colors",
+                  "px-2 py-1 text-[10px] sm:text-xs font-bold rounded-md border transition-colors",
                   selectedSize === size 
                     ? "bg-primary text-primary-foreground border-primary" 
                     : "bg-white text-foreground/70 border-black/5 hover:border-primary/50"
