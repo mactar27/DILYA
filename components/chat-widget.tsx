@@ -10,7 +10,8 @@ import { Button } from '@/components/ui/button'
 export function ChatWidget() {
   const pathname = usePathname()
   const [isOpen, setIsOpen] = useState(false)
-  const { messages, input, handleInputChange, isLoading, error, append, setInput } = useChat()
+  const [localInput, setLocalInput] = useState('')
+  const { messages, isLoading, error, append } = useChat()
   const messagesEndRef = useRef<HTMLDivElement>(null)
 
   // Ne pas afficher sur le dashboard admin
@@ -132,28 +133,38 @@ export function ChatWidget() {
 
         {/* Input */}
         <div className="border-t bg-white p-3">
-          <form onSubmit={(e) => {
-            e.preventDefault();
-            const text = input?.trim();
-            if (!text) return;
-            append({ role: 'user', content: text });
-            setInput('');
-          }} className="flex gap-2 relative">
+          <div className="flex gap-2 relative">
             <input
-              value={input}
-              onChange={handleInputChange}
+              value={localInput}
+              onChange={(e) => setLocalInput(e.target.value)}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter') {
+                  e.preventDefault();
+                  const text = localInput.trim();
+                  if (!text || isLoading) return;
+                  append({ role: 'user', content: text });
+                  setLocalInput('');
+                }
+              }}
               placeholder="Posez votre question..."
               className="flex-1 rounded-full border border-input bg-background px-4 py-2 text-sm outline-none focus:ring-2 focus:ring-primary/20"
               disabled={isLoading}
             />
             <Button 
-              type="submit" 
+              type="button" 
+              onClick={(e) => {
+                e.preventDefault();
+                const text = localInput.trim();
+                if (!text || isLoading) return;
+                append({ role: 'user', content: text });
+                setLocalInput('');
+              }}
               size="icon"
               className="shrink-0 rounded-full h-10 w-10"
             >
               <Send className="h-4 w-4" />
             </Button>
-          </form>
+          </div>
         </div>
       </div>
     </>
