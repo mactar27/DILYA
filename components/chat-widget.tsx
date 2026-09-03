@@ -22,7 +22,7 @@ export function ChatWidget() {
   }
 
   const scrollToBottom = () => {
-    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' })
+    messagesEndRef.current?.scrollIntoView({ behavior: 'auto' })
   }
 
   // eslint-disable-next-line react-hooks/rules-of-hooks
