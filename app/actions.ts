@@ -234,11 +234,19 @@ export async function saveShippingRule(id: string | null, data: { name: string; 
 
 export async function createOrder(data: any) {
   try {
-    const { items, ...orderData } = data
+    const { items, paymentMethod, ...orderData } = data
+
+    let complementStr = orderData.complement || ''
+    if (paymentMethod) {
+      complementStr = complementStr 
+        ? `${complementStr} | Paiement : ${paymentMethod}` 
+        : `Paiement : ${paymentMethod}`
+    }
 
     const order = await prisma.order.create({
       data: {
         ...orderData,
+        complement: complementStr,
         items: {
           create: items.map((item: any) => ({
             productId: item.id,

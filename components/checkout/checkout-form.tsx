@@ -39,6 +39,7 @@ export function CheckoutForm() {
   const [selectedCountry, setSelectedCountry] = useState('')
   const [openCountry, setOpenCountry] = useState(false)
   const [isSubmitting, setIsSubmitting] = useState(false)
+  const [paymentMethod, setPaymentMethod] = useState('Espèces à la livraison')
   const { subtotal, items, clear } = useCart()
   
   const [formData, setFormData] = useState({
@@ -154,14 +155,50 @@ export function CheckoutForm() {
               <div className="mt-8 flex flex-col gap-6 rounded-xl border bg-card p-6">
                 <div>
                   <h3 className="font-medium">Livraison et Paiement</h3>
-                  <p className="mt-1 text-sm text-muted-foreground">
-                    Livraison standard (3 à 5 jours). Paiement en espèces à la livraison.
+                  <p className="mt-1 text-sm text-muted-foreground mb-4">
+                    Choisissez votre méthode de paiement préférée. Livraison standard (3 à 5 jours).
                   </p>
+                  
+                  <div className="flex flex-col gap-3">
+                    <label className="flex items-center gap-3 rounded-lg border p-3 cursor-pointer hover:bg-muted/50 transition-colors">
+                      <input 
+                        type="radio" 
+                        name="paymentMethod" 
+                        value="Espèces à la livraison" 
+                        checked={paymentMethod === 'Espèces à la livraison'}
+                        onChange={(e) => setPaymentMethod(e.target.value)}
+                        className="w-4 h-4 text-primary"
+                      />
+                      <span className="font-medium">Paiement en espèces à la livraison</span>
+                    </label>
+                    <label className="flex items-center gap-3 rounded-lg border p-3 cursor-pointer hover:bg-muted/50 transition-colors">
+                      <input 
+                        type="radio" 
+                        name="paymentMethod" 
+                        value="Wave" 
+                        checked={paymentMethod === 'Wave'}
+                        onChange={(e) => setPaymentMethod(e.target.value)}
+                        className="w-4 h-4 text-[#1dc3f5]"
+                      />
+                      <span className="font-medium">Wave</span>
+                    </label>
+                    <label className="flex items-center gap-3 rounded-lg border p-3 cursor-pointer hover:bg-muted/50 transition-colors">
+                      <input 
+                        type="radio" 
+                        name="paymentMethod" 
+                        value="Orange Money" 
+                        checked={paymentMethod === 'Orange Money'}
+                        onChange={(e) => setPaymentMethod(e.target.value)}
+                        className="w-4 h-4 text-[#f16e00]"
+                      />
+                      <span className="font-medium">Orange Money</span>
+                    </label>
+                  </div>
                 </div>
                 
                 <Button 
                   size="lg"
-                  className="w-full"
+                  className="w-full mt-2"
                   onClick={async () => {
                     if (!formData.firstName || !formData.lastName || !formData.phone || !formData.city || !formData.address || !selectedCountry) {
                       toast.error('Veuillez remplir tous les champs obligatoires.')
@@ -176,7 +213,8 @@ export function CheckoutForm() {
                       ...formData,
                       country: countryName,
                       subtotal: subtotal,
-                      items: items
+                      items: items,
+                      paymentMethod: paymentMethod
                     })
 
                     setIsSubmitting(false)
