@@ -69,9 +69,8 @@ function BoutiqueFiltersAndGrid({ title, products, categories, currentCategorySl
 
       // Size filter
       if (sizesFilter.length > 0) {
-        if (!product.sizes) return false
-        const productSizes = JSON.parse(product.sizes) as string[]
-        const hasMatchingSize = sizesFilter.some(size => productSizes.includes(size))
+        if (!product.sizes || !Array.isArray(product.sizes)) return false
+        const hasMatchingSize = sizesFilter.some(size => product.sizes.includes(size))
         if (!hasMatchingSize) return false
       }
 
