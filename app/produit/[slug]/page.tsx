@@ -9,7 +9,7 @@ import { ReviewForm } from '@/components/product/review-form'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { Separator } from '@/components/ui/separator'
 
-export const dynamic = 'force-dynamic'
+export const revalidate = 3600
 
 interface ProductPageProps {
   params: Promise<{ slug: string }>

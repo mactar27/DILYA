@@ -6,7 +6,7 @@ export const metadata: Metadata = {
   description: 'Découvrez l\'histoire et les valeurs de DILYA.',
 }
 
-export const dynamic = 'force-dynamic'
+export const revalidate = 3600
 
 export default async function AboutPage() {
   const page = await prisma.page.findUnique({

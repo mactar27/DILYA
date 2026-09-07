@@ -4,7 +4,7 @@ import { FeaturedProducts } from '@/components/home/featured-products'
 import { Journal } from '@/components/home/journal'
 import { TrustBar } from '@/components/home/trust-bar'
 
-export const dynamic = 'force-dynamic'
+export const revalidate = 3600
 
 export default function HomePage() {
   return (

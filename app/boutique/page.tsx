@@ -7,7 +7,7 @@ export const metadata: Metadata = {
   description: 'Découvrez toute notre sélection.',
 }
 
-export const dynamic = 'force-dynamic'
+export const revalidate = 3600
 
 export default async function BoutiquePage() {
   const products = await getProducts()

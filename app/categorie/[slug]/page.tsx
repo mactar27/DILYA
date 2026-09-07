@@ -3,7 +3,7 @@ import { notFound } from 'next/navigation'
 import { getCategories, getProductsByCategory } from '@/lib/products'
 import { BoutiqueLayout } from '@/components/boutique/boutique-layout'
 
-export const dynamic = 'force-dynamic'
+export const revalidate = 3600
 
 interface CategoryPageProps {
   params: Promise<{ slug: string }>

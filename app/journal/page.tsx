@@ -3,7 +3,7 @@ import { ArrowRight, Clock } from 'lucide-react'
 import { prisma } from '@/lib/db'
 import type { Metadata } from 'next'
 
-export const dynamic = 'force-dynamic'
+export const revalidate = 3600
 
 export const metadata: Metadata = {
   title: 'Le Journal — DILYA',
