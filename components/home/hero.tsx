@@ -5,18 +5,13 @@ import { ArrowRight } from 'lucide-react'
 export function Hero() {
   return (
     <section className="relative w-full h-screen min-h-[600px] flex items-center justify-center overflow-hidden bg-background">
-      {/* Video Background */}
-      <video 
-        src="/floral_hero.mov" 
-        poster="/floral_hero.png"
-        autoPlay 
-        loop 
-        muted 
-        playsInline
-        controls={false}
-        disablePictureInPicture
-        disableRemotePlayback
-        className="absolute inset-0 w-full h-full object-cover object-center pointer-events-none"
+      {/* Image Background (Optimized) */}
+      <Image
+        src="/floral_hero.jpg"
+        alt="Dilya Floral Hero"
+        fill
+        priority
+        className="absolute inset-0 w-full h-full object-cover object-center"
       />
       {/* Gradient overlay to ensure text readability */}
       <div className="absolute inset-0 bg-black/10 bg-gradient-to-t from-black/30 via-transparent to-black/10"></div>

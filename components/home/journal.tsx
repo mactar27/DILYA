@@ -7,19 +7,19 @@ const articles = [
   {
     title: "5 façons de porter votre pièce DILYA",
     category: "STYLE & MODE",
-    image: "/ChatGPT Image 2 sept. 2026, 03_23_15.png",
+    image: "/journal-1.jpg",
     href: "/journal/5-facons-de-porter",
   },
   {
     title: "Les essentiels d'une garde-robe élégante",
     category: "INSPIRATION",
-    image: "/ChatGPT Image 2 sept. 2026, 03_20_13.png",
+    image: "/journal-2.jpg",
     href: "/journal/essentiels-garde-robe",
   },
   {
     title: "Comment composer un look DILYA NIGHT",
     category: "GUIDE STYLE",
-    image: "/ChatGPT Image 2 sept. 2026, 03_20_04.png",
+    image: "/journal-3.jpg",
     href: "/journal/look-dilya-night",
   },
 ]
