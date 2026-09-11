@@ -98,17 +98,24 @@ export function CheckoutForm() {
                 <div className="space-y-2 sm:col-span-2">
                   <Label>Pays</Label>
                   <Popover open={openCountry} onOpenChange={setOpenCountry}>
-                    <PopoverTrigger 
-                      className={cn(buttonVariants({ variant: "outline" }), "w-full justify-between")}
-                      role="combobox"
-                      aria-expanded={openCountry}
-                    >
+                    <PopoverTrigger asChild>
+                      <button 
+                        type="button"
+                        className={cn(buttonVariants({ variant: "outline" }), "w-full justify-between")}
+                        role="combobox"
+                        aria-expanded={openCountry}
+                      >
                         {selectedCountry
                           ? COUNTRIES.find((country) => country.code === selectedCountry)?.name
                           : "Sélectionnez un pays..."}
                         <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
+                      </button>
                     </PopoverTrigger>
-                    <PopoverContent className="w-[--radix-popover-trigger-width] p-0" align="start">
+                    <PopoverContent 
+                      className="w-[--radix-popover-trigger-width] p-0" 
+                      align="start"
+                      onCloseAutoFocus={(e) => e.preventDefault()}
+                    >
                       <Command
                         filter={(value, search) => {
                           const normalizedValue = value.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase()
